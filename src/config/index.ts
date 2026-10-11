@@ -22,7 +22,7 @@ export const sources = {
 		cacheTtl: 10,
 	},
 	oploverz: {
-		baseUrl: "https://x6.sokuja.uk",
+		baseUrl: "https://oploverz.am",
 		name: "Oploverz",
 		enabled: true,
 		cacheTtl: 10,
