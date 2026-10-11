@@ -6,13 +6,10 @@ import { sources } from "../config/index.js";
 
 const baseUrl = sources.ylnime.baseUrl;
 
-/**
- * Sebagian slug series YLnime diakhiri "/" (mis. `gintama/`) dan tanpa garis
- * miring itu halamannya kosong. Garis miring tidak aman di satu segmen URL,
- * jadi diganti "~" saat dikirim ke klien dan dikembalikan saat diminta.
- */
-export const toSeriesToken = (slug: string): string => slug.replace(/\/$/, "~");
-export const fromSeriesToken = (token: string): string => token.replace(/~$/, "/");
+export const toSeriesToken = (slug: string): string =>
+	slug.replace(/\?/g, "~q").replace(/#/g, "~h").replace(/\/$/, "~");
+export const fromSeriesToken = (token: string): string =>
+	token.replace(/~$/, "/").replace(/~q/g, "?").replace(/~h/g, "#");
 
 /** Halaman episode butuh slug series, jadi keduanya digabung dalam satu token. */
 const EPISODE_SEPARATOR = "__";
