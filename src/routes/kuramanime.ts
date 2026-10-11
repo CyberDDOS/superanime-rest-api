@@ -21,5 +21,7 @@ router.get("/properties/:propertyType/:propertyId", serverCache(10), ctrl.getAni
 router.get("/anime/:animeId/:animeSlug", serverCache(10), ctrl.getAnimeDetails);
 router.get("/batch/:animeId/:animeSlug/:batchId", serverCache(10), ctrl.getBatchDetails);
 router.get("/episode/:animeId/:animeSlug/:episodeId", serverCache(10), ctrl.getEpisodeDetails);
+// `:file` hanya nama file asli, supaya URL proxy tetap berakhiran .mp4.
+router.get("/stream/:file", ctrl.streamVideo);
 
 export default router;

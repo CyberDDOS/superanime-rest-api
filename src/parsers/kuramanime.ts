@@ -1,4 +1,4 @@
-import type { HTMLElement } from "node-html-parser";
+import { HTMLElement } from "node-html-parser";
 import { NotFoundError } from "../lib/errors.js";
 import { Text, Id, Src, Num, Attr, AnimeSrc } from "./utils.js";
 import type { Kuramanime, Format, Quality, UrlLink, Pagination } from "../types/index.js";
@@ -373,17 +373,55 @@ export function parseBatchDetails(doc: HTMLElement): Kuramanime.BatchDetails {
 	};
 }
 
-export function parseEpisodeDetails(doc: HTMLElement): Kuramanime.EpisodeDetails {
-	const titleEl = doc.querySelector("h1");
-	if (!titleEl) throw new NotFoundError("Episode title not found");
+/**
+ * `#animeDownloadLink` berisi deretan `<h6>` ("MKV 480p (Softsub) — (147.85 MB)")
+ * yang masing-masing diikuti tautan unduhannya. Tautan yang belum aktif
+ * (`link-disabled`, tanpa href) dilewati.
+ */
+function parseDownloadSection(doc: HTMLElement): Format[] {
+	const container = doc.querySelector("#animeDownloadLink");
+	if (!container) return [];
 
-	const navLinks = doc.querySelectorAll(".episode__nav a, .episode-navigation a");
+	const formats = new Map<string, Quality[]>();
+	let current: Quality | null = null;
+
+	for (const el of container.childNodes) {
+		if (!(el instanceof HTMLElement)) continue;
+		if (el.tagName === "H6") {
+			const heading = Text(el);
+			const match = heading.match(/^(\S+)\s+(.+?)\s*(?:—|-)\s*\(([^)]+)\)\s*$/);
+			const format = match?.[1] ?? "Download";
+			current = { title: match?.[2] ?? heading, size: match?.[3] ?? "", urlList: [] };
+			formats.set(format, [...(formats.get(format) ?? []), current]);
+		} else if (el.tagName === "A" && current) {
+			const href = Attr(el, "href");
+			if (href && !href.startsWith("javascript")) current.urlList?.push({ title: Text(el), url: href });
+		}
+	}
+
+	return [...formats]
+		.map(([title, qualityList]) => ({ title, qualityList: qualityList.filter((q) => q.urlList?.length) }))
+		.filter((format) => format.qualityList.length);
+}
+
+export function parseEpisodeDetails(doc: HTMLElement): Kuramanime.EpisodeDetails {
+	const titleEl = doc.querySelector("#episodeTitle, h1");
+	const title = titleEl
+		? Text(titleEl)
+		: Text(doc.querySelector("title")).replace(/\s*-\s*Kuramanime\s*$/i, "");
+	if (!title) throw new NotFoundError("Episode title not found");
+
+	// Tautan yang tidak tersedia tetap dirender, tapi diberi `nav__disabled`
+	// dan menunjuk ke episode yang sedang dibuka.
+	const navLinks = doc.querySelectorAll(
+		".episode__navigations a.before__nav, .episode__navigations a.after__nav, .episode__nav a, .episode-navigation a",
+	);
 	let prev: Kuramanime.EpisodeCard | null = null;
 	let next: Kuramanime.EpisodeCard | null = null;
 	for (const link of navLinks) {
 		const text = Text(link).toLowerCase();
 		const href = Attr(link, "href");
-		if (!href || href.includes("javascript")) continue;
+		if (!href || href.includes("javascript") || link.classList.contains("nav__disabled")) continue;
 
 		const card: Kuramanime.EpisodeCard = {
 			title: Text(link),
@@ -394,21 +432,23 @@ export function parseEpisodeDetails(doc: HTMLElement): Kuramanime.EpisodeDetails
 			sourceUrl: AnimeSrc(link, baseUrl),
 		};
 
-		if (text.includes("prev") || text.includes("sebelumnya")) {
+		if (link.classList.contains("before__nav") || text.includes("prev") || text.includes("sebelumnya")) {
 			prev = card;
-		} else if (text.includes("next") || text.includes("selanjutnya")) {
+		} else if (link.classList.contains("after__nav") || text.includes("next") || text.includes("selanjutnya")) {
 			next = card;
 		}
 	}
 
 	const streaming: UrlLink[] = [];
-	const sourceEls = doc.querySelectorAll("#player source");
-	for (const src of sourceEls) {
+	const hlsSrc = Attr(doc.querySelector("#player"), "data-hls-src");
+	if (hlsSrc) streaming.push({ title: "HLS", url: hlsSrc });
+
+	// Kuramadrive menaruh tiap resolusi sebagai <source size="720">.
+	for (const src of doc.querySelectorAll("#player source")) {
 		const url = Attr(src, "src");
-		const type = Attr(src, "type") || "";
-		if (url) {
-			streaming.push({ title: type || "Unknown", url });
-		}
+		if (!url) continue;
+		const size = Attr(src, "size");
+		streaming.push({ title: size ? `${size}p` : Attr(src, "type") || "Unknown", url });
 	}
 	if (!streaming.length) {
 		const iframes = doc.querySelectorAll("#player iframe, .player iframe");
@@ -418,7 +458,7 @@ export function parseEpisodeDetails(doc: HTMLElement): Kuramanime.EpisodeDetails
 		}
 	}
 
-	const downloadLinks: Format[] = [];
+	const downloadLinks: Format[] = parseDownloadSection(doc);
 	const downloadContainers = doc.querySelectorAll(".download-format, .episode__download");
 	for (const container of downloadContainers) {
 		const formatTitleEl = container.querySelector("h4, h5, strong");

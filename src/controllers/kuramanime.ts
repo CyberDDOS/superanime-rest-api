@@ -1,4 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
+import { Readable } from "node:stream";
+import type { ReadableStream as NodeReadableStream } from "node:stream/web";
 import { parse as safeParse, ValiError } from "valibot";
 import * as schema from "../schemas/kuramanime.js";
 import * as scraper from "../scrapers/kuramanime.js";
@@ -235,10 +237,7 @@ export async function getBatchDetails(
 			throw new BadRequestError("animeId, animeSlug, and batchId are required");
 		}
 
-		const secret = await scraper.scrapeSecret();
-		const protectedUrl = `/anime/${animeId}/${animeSlug}/batch/${batchId}?Ub3BzhijicHXZdv=${secret}&C2XAPerzX1BM7V9=kuramadrive`;
-
-		const doc = await scraper.scrapeDOM(protectedUrl);
+		const doc = await scraper.scrapeProtectedPage("batch", String(animeId), String(animeSlug), String(batchId));
 		const data = parser.parseBatchDetails(doc);
 		res.json(setPayload(res, { data }));
 	} catch (err) {
@@ -257,13 +256,38 @@ export async function getEpisodeDetails(
 			throw new BadRequestError("animeId, animeSlug, and episodeId are required");
 		}
 
-		const secret = await scraper.scrapeSecret();
-		const protectedUrl = `/anime/${animeId}/${animeSlug}/episode/${episodeId}?Ub3BzhijicHXZdv=${secret}&C2XAPerzX1BM7V9=kuramadrive`;
-
-		const doc = await scraper.scrapeDOM(protectedUrl);
+		const doc = await scraper.scrapeProtectedPage("episode", String(animeId), String(animeSlug), String(episodeId));
 		const data = parser.parseEpisodeDetails(doc);
 		res.json(setPayload(res, { data }));
 	} catch (err) {
+		next(err);
+	}
+}
+
+/** Proxy video mirror kdrive dengan dukungan Range (lihat `isKdriveMirror`). */
+export async function streamVideo(req: Request, res: Response, next: NextFunction) {
+	try {
+		const url = typeof req.query.url === "string" ? req.query.url : "";
+		if (!scraper.isKdriveMirror(url)) throw new BadRequestError("Query 'url' must be a Kuramadrive mirror URL");
+
+		const controller = new AbortController();
+		res.on("close", () => controller.abort());
+
+		const upstream = await scraper.fetchStream(url, req.get("range"), controller.signal);
+		res.status(upstream.status);
+		for (const name of ["content-type", "content-length", "content-range", "accept-ranges", "last-modified", "etag"]) {
+			const value = upstream.headers.get(name);
+			if (value) res.setHeader(name, value);
+		}
+		res.setHeader("Cache-Control", "private, max-age=300");
+
+		if (!upstream.body) {
+			res.end();
+			return;
+		}
+		Readable.fromWeb(upstream.body as unknown as NodeReadableStream).on("error", () => res.destroy()).pipe(res);
+	} catch (err) {
+		if (err instanceof Error && err.name === "AbortError") return;
 		next(err);
 	}
 }

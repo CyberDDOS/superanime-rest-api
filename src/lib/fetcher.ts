@@ -2,7 +2,7 @@ import { parse as parseHtml, type HTMLElement } from "node-html-parser";
 import sanitizeHtml from "sanitize-html";
 import { BadGatewayError } from "./errors.js";
 
-const DEFAULT_USER_AGENT =
+export const DEFAULT_USER_AGENT =
 	"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0";
 
 export interface FetchOptions {
@@ -23,7 +23,7 @@ export interface FetchOptions {
  * potongan teksnya ikut dibawa, bersama `cf-ray` supaya bisa dicocokkan dengan
  * log Cloudflare.
  */
-async function describeFailure(res: Response, url: string): Promise<string> {
+export async function describeFailure(res: Response, url: string): Promise<string> {
 	let snippet = "";
 
 	try {

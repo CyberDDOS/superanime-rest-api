@@ -20,6 +20,13 @@ export const sources = {
 		name: "Kuramanime",
 		enabled: true,
 		cacheTtl: 10,
+		// Halaman episode yang memuat <source> video hanya dibalas untuk POST
+		// berisi field `authorization`. Nilainya diekstrak otomatis dari
+		// `storage/leviathan.js` (lihat scrapers/kuramanime-auth.ts). Env ini
+		// hanya override darurat bila ekstraksi gagal; nilai cadangan dipakai
+		// kalau keduanya tidak tersedia.
+		streamAuthorizationOverride: process.env.KURAMANIME_AUTHORIZATION || "",
+		streamAuthorizationFallback: "kJuHHkaqcBFXiGMHQf6bJw8YAyDcwGD8Ur",
 	},
 	oploverz: {
 		baseUrl: "https://oploverz.am",
