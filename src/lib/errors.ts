@@ -13,9 +13,11 @@ export class AppError extends Error {
 	get statusMessage(): string {
 		switch (this.statusCode) {
 			case 400: return "Bad Request";
+			case 401: return "Unauthorized";
 			case 404: return "Not Found";
 			case 502: return "Bad Gateway";
 			case 500: return "Internal Server Error";
+			case 503: return "Service Unavailable";
 			default: return "Error";
 		}
 	}
@@ -26,6 +28,22 @@ export class BadRequestError extends AppError {
 	constructor(message = "Bad request") {
 		super(400, message);
 		this.name = "BadRequestError";
+	}
+}
+
+/** 401 Unauthorized */
+export class UnauthorizedError extends AppError {
+	constructor(message = "Unauthorized") {
+		super(401, message);
+		this.name = "UnauthorizedError";
+	}
+}
+
+/** 503 Service Unavailable */
+export class ServiceUnavailableError extends AppError {
+	constructor(message = "Service unavailable") {
+		super(503, message);
+		this.name = "ServiceUnavailableError";
 	}
 }
 

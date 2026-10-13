@@ -16,6 +16,6 @@
     "declaration": false,
     "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*.ts", "api/**/*.ts"],
+  "include": ["src/**/*.ts", "api/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

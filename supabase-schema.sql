@@ -122,7 +122,10 @@ CREATE TRIGGER trg_episodes_updated_at
   BEFORE UPDATE ON public.episodes
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
--- 9. RLS (Row Level Security) — allow anon read/write
+-- 9. RLS (Row Level Security) — publik hanya boleh membaca.
+-- Anon key ikut terekspos di client, jadi tidak boleh punya akses tulis.
+-- Backend menulis memakai service role key (SUPABASE_SERVICE_ROLE_KEY), yang
+-- melewati RLS, sehingga tabel-tabel ini sengaja tidak punya policy tulis.
 ALTER TABLE public.sources     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.anime       ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.episodes    ENABLE ROW LEVEL SECURITY;
@@ -131,18 +134,10 @@ ALTER TABLE public.anime_genres ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.home_cache  ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sync_log    ENABLE ROW LEVEL SECURITY;
 
--- Allow public access (dengan anon key)
 CREATE POLICY "Allow public read"  ON public.sources      FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.sources      FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.anime        FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.anime        FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.episodes     FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.episodes     FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.genres       FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.genres       FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.anime_genres FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.anime_genres FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.home_cache   FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.home_cache   FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public read"  ON public.sync_log     FOR SELECT USING (true);
-CREATE POLICY "Allow public write" ON public.sync_log     FOR ALL USING (true) WITH CHECK (true);

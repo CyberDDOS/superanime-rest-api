@@ -66,6 +66,7 @@ bun dev                # http://localhost:3001
 | `bun dev` | Dev server dengan hot reload. |
 | `bun start` | Menjalankan server tanpa hot reload. |
 | `bun typecheck` | Pemeriksaan tipe dengan `tsc --noEmit`. |
+| `bun run test` | Test parser terhadap fixture HTML asli di `test/fixtures`. Saat situs sumber mengganti markup, simpan ulang HTML-nya ke fixture lalu perbaiki parser sampai test lolos. |
 
 ### Environment
 
@@ -73,7 +74,9 @@ bun dev                # http://localhost:3001
 | --- | --- | --- | --- |
 | `PORT` | tidak | `3001` | Port server lokal. |
 | `SUPABASE_URL` | untuk sync | — | URL project Supabase. |
-| `SUPABASE_ANON_KEY` | untuk sync | — | Anon key Supabase. |
+| `SUPABASE_SERVICE_ROLE_KEY` | untuk sync | — | Service role key; satu-satunya key yang bisa menulis ke tabel konten. Rahasia, hanya untuk server. |
+| `SUPABASE_ANON_KEY` | tidak | — | Cadangan hanya-baca bila service role key kosong. |
+| `SYNC_SECRET` | untuk `POST /sync` | — | Dikirim sebagai `Authorization: Bearer <secret>`. Tanpa ini `POST /sync` ditolak (503). `CRON_SECRET` Vercel juga diterima. |
 
 Tanpa kredensial Supabase, rute `/sync` dan `/db` tidak dipasang; semua rute scraping
 tetap berjalan normal.
@@ -238,7 +241,13 @@ Semua endpoint memakai bentuk yang sama:
 
 1. Buat project Supabase.
 2. Jalankan [supabase-schema.sql](supabase-schema.sql) di SQL Editor.
-3. Isi `SUPABASE_URL` dan `SUPABASE_ANON_KEY` di `.env`.
+3. Isi `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, dan `SYNC_SECRET` di `.env`.
+
+Publik (anon key) hanya bisa **membaca** tabel konten; semua penulisan lewat
+backend dengan service role key. Database lama yang dibuat dengan skema
+sebelumnya perlu menjalankan
+[supabase/migrations/20261014_restrict_content_writes.sql](supabase/migrations/20261014_restrict_content_writes.sql)
+untuk mencabut policy tulis publiknya.
 
 | Tabel | Isi |
 | --- | --- |
@@ -251,7 +260,7 @@ Semua endpoint memakai bentuk yang sama:
 
 | Method | Endpoint | Keterangan |
 | --- | --- | --- |
-| `POST` | `/sync/:source/:type` | Scrape lalu simpan ke database |
+| `POST` | `/sync/:source/:type` | Scrape lalu simpan ke database (butuh `Authorization: Bearer <SYNC_SECRET>`) |
 | `GET` | `/sync/status` | Riwayat sinkronisasi |
 | `GET` | `/db/anime?source_id=&search=&page=` | Query anime dari database |
 

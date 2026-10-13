@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OPSI 5: Preconnect / DNS-prefetch untuk mempercepat load (Core Web Vitals) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://apps.animekita.org">
+    <link rel="dns-prefetch" href="https://assets.animekita.org">
+    <link rel="dns-prefetch" href="https://graphql.anilist.co">
+
+    <!-- OPSI 1: Canonical per halaman (cegah duplicate content dari param reso dll) -->
+    <link rel="canonical" href="https://ylnime.com/">
+
+    <!-- Download, Nonton, &amp; Streaming Anime Tensei shitara Slime Datta Ken Season 4 Sub Indo resolusi 360p, 480p, 720p lengkap beserta Batch format Mp4 dan Mkv. -->
+    <meta name="description" content="YLnime - Nonton anime sub indo gratis online! Streaming HD 360p-1080p, download batch, update episode terbaru tiap hari, subtitle Indonesia lengkap.">
+    <meta name="keywords" content="nonton YLnime | Nonton Anime Sub Indo Online Gratis sub indo hd, streaming YLnime | Nonton Anime Sub Indo Online Gratis sub indo, nonton anime, streaming anime gratis, anime sub indo, download anime batch, anime terbaru 2026, ylnime, anime populer juli 2026, anime tanpa iklan, web streaming anime terbaik 2026">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:title" content="Nonton Anime isekai Sub Indo HD Gratis | YLnime" />
+    <meta property="og:description" content="YLnime - Nonton anime sub indo gratis online! Streaming HD 360p-1080p, download batch, update episode terbaru tiap hari, subtitle Indonesia lengkap." />
+    <meta property="og:image" content="https://ylnime.com/banner.jpg" />
+    <meta property="og:url" content="https://ylnime.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="YLnime" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nonton Anime isekai Sub Indo HD Gratis | YLnime">
+    <meta name="twitter:description" content="Streaming anime subtitle Indonesia terbaru dan terlengkap. Nonton gratis, kualitas HD, update cepat, bebas iklan. Web anime terbaik 2026!">
+    <meta name="twitter:image" content="https://ylnime.com/banner.jpg">
+    <meta name="google-site-verification" content="fBRC2G0DyFZ6BMMd7IE6SAG8kHoHHIDqpsiorjPidUY" />
+    <!-- Schema Markup untuk Google 2026 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://ylnime.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://ylnime.com/index-v2.php?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+            <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Nonton Anime isekai Sub Indo HD Gratis | YLnime</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- DIHAPUS 2026-09: React + ReactDOM + Babel (1,79 MB) dimuat di SETIAP halaman
+         padahal TIDAK dipakai sama sekali (0 baris kode React di situs ini).
+         Ketiganya <script> biasa tanpa async/defer sehingga MEMBLOKIR tampilan,
+         dan diambil dari unpkg.com yang sering lambat di Indonesia — inilah salah
+         satu penyebab halaman terasa "loading terus".
+         react.development.js 102 KB + react-dom.development.js 918 KB + babel.min.js 772 KB -->
+
+    <style>
+    /* ========================================= */
+    /* NETFLIX UI & ANIMATION OVERHAUL           */
+    /* ========================================= */
+    :root, [data-theme="dark"] {
+        --font-main: 'Poppins', sans-serif;
+        --bg-body: #141414; /* Netflix Black */
+        --bg-card: #1f1f1f;
+        --text-primary: #ffffff;
+        --text-secondary: #a3a3a3;
+        --accent-color: #E50914; /* Netflix Red */
+        --accent-hover: #b20710;
+        --border-color: #2b2b2b;
+        --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.8);
+        --nav-bg: rgba(20, 20, 20, 0.95);
+        --hero-gradient: linear-gradient(180deg, rgba(0,0,0,0) 0%, #141414 100%);
+    }
+
+    /* Kustomisasi Scrollbar agar elegan */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #141414; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #E50914; }
+
+    body {
+        background-color: var(--bg-body); 
+        color: var(--text-primary);
+        font-family: var(--font-main); 
+        overflow-x: hidden;
+    }
+    
+    a { text-decoration: none; color: inherit; transition: 0.2s; }
+    a:hover { color: var(--accent-color); }
+    
+    /* Navbar Netflix Style */
+    .navbar {
+        background: var(--nav-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--border-color); padding: 1.2rem 0; position: sticky; top: 0; z-index: 1000;
+        transition: 0.4s ease;
+    }
+    .navbar-brand { font-weight: 700; font-size: 1.6rem; color: var(--accent-color) !important; letter-spacing: 1px; text-transform: uppercase; }
+    .nav-link { color: #e5e5e5 !important; font-weight: 500; font-size: 0.9rem; margin: 0 8px; transition: 0.3s; }
+    .nav-link:hover { color: #fff !important; transform: scale(1.05); }
+
+    /* Tombol Style */
+    .btn-primary { background-color: var(--accent-color); border: none; font-weight: 600; border-radius: 4px; padding: 0.6rem 1.5rem; transition: 0.3s ease; }
+    .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-outline-primary { color: #fff; border: 1px solid #555; border-radius: 4px; font-weight: 500; background: rgba(255,255,255,0.1); transition: 0.3s; }
+    .btn-outline-primary:hover, .btn-outline-primary.active { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+
+    /* Card Anime - Netflix Hover Effect */
+    .card { background-color: transparent; border: none; overflow: visible; }
+    .card-img-wrapper {
+        border-radius: 8px; overflow: hidden; position: relative; box-shadow: var(--shadow-sm);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    }
+    .card:hover .card-img-wrapper { transform: scale(1.08); z-index: 10; box-shadow: 0 15px 35px rgba(0,0,0,0.9); border: 2px solid rgba(255,255,255,0.1); }
+    .card-img-top { height: 280px; object-fit: cover; width: 100%; transition: opacity 0.3s; }
+    .card-title { color: var(--text-primary); font-weight: 600; font-size: 0.95rem; margin-top: 10px; transition: 0.3s; }
+    .card:hover .card-title { color: var(--accent-color); }
+
+    /* Video Player Fix */
+    .video-wrapper {
+        position: relative; padding-top: 56.25%; background-color: #000; overflow: hidden;
+        border-radius: 8px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);
+    }
+    #video-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; background-color: #000; display: flex; justify-content: center; align-items: center; }
+    #player-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
+    #player-container iframe, #player-container video { width: 100%; height: 100%; border: none; }
+    .ylnime-watermark { position: absolute; bottom: 15px; left: 20px; z-index: 20; pointer-events: none; color: rgba(255, 255, 255, 0.4); font-weight: 900; text-shadow: 1px 1px 4px #000; font-size: 1.5rem; }
+
+    /* Tombol "Ketuk untuk suara" (muncul bila browser mobile memblokir autoplay bersuara) */
+    @keyframes pulseUnmute { 0%,100%{transform:translateX(-50%) scale(1);} 50%{transform:translateX(-50%) scale(1.06);} }
+    #unmute-banner:hover { background:#b20710 !important; }
+
+    /* ===== Baris aksi episode (perbaiki suara / laporkan / dukung) ===== */
+    .yl-epbar { display:flex; gap:8px; flex-wrap:wrap; }
+    .yl-epbtn { display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:30px;
+        font-size:.85rem; font-weight:600; cursor:pointer; text-decoration:none; transition:.2s;
+        background:rgba(255,255,255,.06); border:1px solid #333; color:#ccc; }
+    .yl-epbtn:hover { transform:translateY(-2px); color:#fff; }
+    .yl-epbtn.yl-fix:hover { background:#0d6efd; border-color:#0d6efd; }
+    .yl-epbtn.yl-rep:hover { background:#6c757d; border-color:#6c757d; }
+    .yl-epbtn.yl-don { background:rgba(229,9,20,.12); border-color:rgba(229,9,20,.4); color:#ff8a90; }
+    .yl-epbtn.yl-don:hover { background:#E50914; border-color:#E50914; color:#fff; }
+    @media (max-width:576px){
+        /* 3 tombol muat dalam SATU baris, porsi seimbang */
+        .yl-epbar { gap:6px; flex-wrap:nowrap; }
+        .yl-epbtn { flex:1 1 0; min-width:0; justify-content:center; padding:9px 6px; font-size:.76rem; gap:5px; }
+        .yl-epbtn span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .yl-epbtn i { flex-shrink:0; }
+    }
+
+    /* ===== Kartu dukungan (halaman detail anime) — ringkas, tidak mengganggu ===== */
+    .yl-support { background:linear-gradient(135deg, rgba(229,9,20,.10), rgba(255,215,0,.05));
+        border:1px solid var(--border-color); border-radius:12px; padding:14px 16px; margin-top:14px; }
+    .yl-support .t { font-weight:700; color:#fff; font-size:.9rem; }
+    .yl-support .d { color:var(--text-secondary); font-size:.78rem; line-height:1.5; margin:4px 0 10px; }
+    .yl-support .b { display:flex; gap:8px; flex-wrap:wrap; }
+    .yl-support .b a { flex:1 1 auto; text-align:center; padding:8px 12px; border-radius:8px;
+        font-size:.8rem; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .yl-support .b .p { background:#E50914; color:#fff; } .yl-support .b .p:hover { background:#b20710; color:#fff; }
+    .yl-support .b .s { background:rgba(255,255,255,.07); border:1px solid #333; color:#ccc; }
+    .yl-support .b .s:hover { color:#fff; border-color:#555; }
+
+    /* Tautan donasi di navbar */
+    .nav-link.yl-nav-don { color:#ff8a90 !important; font-weight:600; }
+    .nav-link.yl-nav-don:hover { color:#E50914 !important; }
+
+    /* Episode List */
+    .list-group-item { background-color: var(--bg-card); border-color: var(--border-color); color: var(--text-primary); transition: 0.2s; border-radius: 6px !important; margin-bottom: 5px; }
+    .list-group-item:hover { background-color: #333; padding-left: 20px; }
+    .list-group-item.watched { background-color: rgba(229, 9, 20, 0.1); border-left: 4px solid var(--accent-color); }
+
+    /* Inputs & Modals */
+    .form-control { background-color: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 4px; padding: 12px; }
+    .form-control:focus { background-color: #000; border-color: var(--accent-color); color: var(--text-primary); box-shadow: none; }
+    .modal-content { background-color: #141414; color: var(--text-primary); border: 1px solid #333; border-radius: 8px; }
+    .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+
+    /* Banners Carousel */
+    .banner-container { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 3rem; position: relative; }
+    .banner-img { width: 100%; height: 300px; object-fit: cover; transition: transform 10s ease; }
+    .carousel-item.active .banner-img { transform: scale(1.08); }
+    .banner-overlay { position: absolute; bottom: 0; left: 0; right: 0; top: 0; background: var(--hero-gradient); pointer-events: none; }
+    
+    @media (min-width: 768px) { .banner-img { height: 500px; } }
+    @media (max-width: 768px) { .card-img-top { height: 200px; } }
+
+    footer { background-color: #080808; border-top: 1px solid #222; margin-top: 5rem; padding: 4rem 0; color: #777; }
+    
+    /* Animasi Bawaan */
+    .fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; transform: translateY(15px); }
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    
+    .avatar-circle { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
+    .avatar-lg { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); box-shadow: 0 0 15px rgba(229,9,20,0.5); }
+    </style>
+
+    
+</head>
+<body>
+    <style>
+/* ===== Navbar YLnime — ringkas di desktop, mudah dipindai di HP ===== */
+.yl-nav .nav-link{font-weight:500;padding:.5rem .85rem !important;white-space:nowrap;}
+.yl-nav .nav-link.active{color:#fff !important;font-weight:700;}
+.yl-nav .dropdown-menu{background:#141414;border:1px solid #333;border-radius:12px;
+  padding:8px;min-width:210px;box-shadow:0 12px 30px rgba(0,0,0,.55);}
+.yl-nav .dropdown-item{color:#ddd;border-radius:8px;padding:9px 12px;font-size:.9rem;}
+.yl-nav .dropdown-item:hover,.yl-nav .dropdown-item:focus{background:rgba(229,9,20,.16);color:#fff;}
+.yl-nav .dropdown-item.active{background:var(--accent-color,#E50914);color:#fff;}
+.yl-nav .dropdown-item i{width:20px;text-align:center;margin-right:8px;opacity:.85;}
+.yl-nav .nav-donasi{color:#ff8a90 !important;font-weight:700;}
+.yl-nav .nav-donasi:hover{color:#E50914 !important;}
+
+/* ===== Tampilan HP: grup dibuka jadi bagian, bukan menu bertingkat =====
+   Alasan: menu bertingkat di layar sempit butuh dua kali sentuh dan mudah
+   membingungkan. Dibuka langsung sebagai daftar bersekat lebih cepat dibaca. */
+@media (max-width: 991.98px){
+  /* PENTING: semua aturan di bawah dibatasi ke #ylNavMenu (menu utama) saja.
+     Kalau memakai ".yl-nav .dropdown-menu", menu PENGGUNA (avatar) ikut kena
+     display:block + position:static sehingga selalu terbuka dan mendorong
+     tata letak — dan pointer-events:none membuat avatar tak bisa diklik. */
+  #ylNavMenu .navbar-nav{padding-top:8px;}
+  #ylNavMenu .dropdown-toggle::after{display:none;}
+  #ylNavMenu .dropdown-toggle{pointer-events:none;font-size:.72rem;text-transform:uppercase;
+    letter-spacing:1px;color:#7a7a80 !important;font-weight:700;padding-bottom:2px !important;}
+  #ylNavMenu .dropdown-menu{display:block !important;position:static !important;float:none;
+    background:transparent !important;border:none !important;box-shadow:none !important;
+    padding:0 0 10px 4px;margin:0;min-width:0;}
+  #ylNavMenu .dropdown-item{padding:10px 10px;font-size:.95rem;}
+  #ylNavMenu .nav-item{border-bottom:1px solid rgba(255,255,255,.05);}
+  #ylNavMenu .nav-item:last-child{border-bottom:none;}
+  #ylNavMenu .nav-donasi{padding:12px 10px !important;}
+
+  /* Menu pengguna (avatar) tetap bekerja normal: tertutup sampai diketuk. */
+  .yl-nav .order-lg-3 .dropdown-menu{position:absolute !important;background:#141414 !important;
+    border:1px solid #333 !important;box-shadow:0 12px 30px rgba(0,0,0,.55) !important;}
+}
+</style>
+
+<nav class="navbar navbar-expand-lg yl-nav">
+  <div class="container">
+    <a class="navbar-brand" href="index.php"><i class="fas fa-play me-2"></i>YLnime</a>
+
+    <!-- Sisi kanan: lonceng + pengguna + tombol menu HP -->
+    <div class="d-flex align-items-center order-lg-3">
+          <link rel="stylesheet" href="assets/ylnime-v2.css">
+    <div class="ylnime-notif-wrap" id="ylnimeNotifWrap" data-logged="0" data-nick="">
+        <button class="ylnime-notif-btn" id="ylnimeNotifBtn" type="button" aria-label="Notifikasi diskusi" title="Notifikasi Diskusi">
+            <i class="fas fa-bell"></i>
+            <span class="ylnime-notif-badge" id="ylnimeNotifBadge">0</span>
+        </button>
+        <div class="ylnime-notif-panel" id="ylnimeNotifPanel">
+            <div class="ylnime-notif-head">
+                <span><i class="fas fa-comments me-2 text-danger"></i>Diskusi Terbaru</span>
+                <a href="chat8.php" class="ylnime-notif-all">Buka Forum</a>
+            </div>
+            <div class="ylnime-notif-list" id="ylnimeNotifList">
+                <div class="ylnime-notif-empty">Memuat...</div>
+            </div>
+            <div class="ylnime-notif-foot" id="ylnimeNotifFoot"></div>
+        </div>
+    </div>
+    <script src="assets/notif.js" defer></script>
+    <script>
+    /* PWA install prompt (halus, non-intrusif) */
+    (function(){
+        var KEY='ylnime_pwa_dismiss_v2';
+        var deferred=null;
+        window.addEventListener('beforeinstallprompt', function(e){
+            e.preventDefault(); deferred=e;
+            if (localStorage.getItem(KEY)) return;
+            setTimeout(showBanner, 8000);
+        });
+        function showBanner(){
+            if(!deferred || document.getElementById('ylnimePwa')) return;
+            var b=document.createElement('div');
+            b.id='ylnimePwa'; b.className='ylnime-pwa-banner';
+            b.innerHTML='<i class="fas fa-mobile-screen-button text-danger fa-lg"></i>'+
+                '<div class="ylp-txt"><b>Pasang YLnime</b><br>Akses cepat seperti aplikasi</div>'+
+                '<button class="ylp-install">Pasang</button>'+
+                '<button class="ylp-close" aria-label="Tutup">&times;</button>';
+            document.body.appendChild(b);
+            b.querySelector('.ylp-install').onclick=function(){
+                b.remove(); if(deferred){ deferred.prompt(); deferred=null; }
+                localStorage.setItem(KEY,'1');
+            };
+            b.querySelector('.ylp-close').onclick=function(){ b.remove(); localStorage.setItem(KEY,'1'); };
+        }
+    })();
+    </script>
+    
+              <a href="account.php" class="btn btn-primary btn-sm px-4 fw-bold rounded-1">Masuk</a>
+      
+      <button class="navbar-toggler ms-2 border-0 text-white" type="button"
+              data-bs-toggle="collapse" data-bs-target="#ylNavMenu" aria-label="Buka menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Menu utama -->
+    <div class="collapse navbar-collapse" id="ylNavMenu">
+      <ul class="navbar-nav ms-auto me-3">
+                              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle "
+                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                Jelajahi              </a>
+              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item "
+                         href="ongoing.php">
+                    <i class="fas fa-tower-broadcast"></i>Ongoing                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="completed.php">
+                    <i class="fas fa-circle-check"></i>Tamat                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="movies.php">
+                    <i class="fas fa-film"></i>Movie                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="genre.php">
+                    <i class="fas fa-layer-group"></i>Genre                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="anime-list.php">
+                    <i class="fas fa-list"></i>Daftar A-Z                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="rekomendasi.php">
+                    <i class="fas fa-star"></i>Rekomendasi                  </a></li>
+                              </ul>
+            </li>
+                                        <li class="nav-item">
+              <a class="nav-link "
+                 href="jadwals.php">Jadwal</a>
+            </li>
+                                        <li class="nav-item">
+              <a class="nav-link "
+                 href="baru.php">Terbaru</a>
+            </li>
+                                        <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle "
+                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                Komunitas              </a>
+              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item "
+                         href="chat8.php">
+                    <i class="fas fa-comments"></i>Diskusi                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="polling.php">
+                    <i class="fas fa-trophy"></i>Polling                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="hyper.php">
+                    <i class="fas fa-fire"></i>TerHype                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="/werewolf/">
+                    <i class="fas fa-moon"></i>Werewolf                  </a></li>
+                              </ul>
+            </li>
+                  
+        <li class="nav-item">
+          <a class="nav-link nav-donasi" href="top-donate.php" title="Dukung YLnime">
+            <i class="fas fa-heart me-1"></i>Donasi
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- IKLAN: header banner -->
+    <div class="container mt-3"><div class="ylnime-ad-wrapper text-center my-3" style="width: 100%; overflow: hidden;"><a href="http://mc.ylnime.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; max-width: 100%;"><img src="admin/ad_media/emceh.gif" alt="Advertisement" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"></a></div><div class="ylnime-ad-wrapper text-center my-3" style="width: 100%; overflow: hidden;"><a href="https://webnovel.ylnime.com" target="_blank" rel="noopener noreferrer" style="display: inline-block; max-width: 100%;"><img src="admin/ad_media/bad_6a98aa3acc9ab.png" alt="Advertisement" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"></a></div></div>
+    
+    <div class="container my-4" style="min-height: 70vh;">
+        
+                <div class="row justify-content-center mb-5 fade-in" style="animation-delay: 0.1s;">
+            <div class="col-md-8">
+                <form action="" method="GET" class="search-form d-flex position-relative">
+                    <i class="fas fa-search position-absolute text-secondary" style="top: 50%; transform: translateY(-50%); left: 20px; font-size:1.2rem;"></i>
+                    <input type="text" name="search" class="form-control me-2 py-3" style="padding-left: 50px; font-size: 1.1rem; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid #444;" placeholder="Cari judul anime favoritmu..." value="isekai">
+                    <button type="submit" class="btn btn-primary px-4 fw-bold" style="border-radius: 8px;">Cari</button>
+                </form>
+            </div>
+        </div>
+        
+                                <h3 class="fw-bold mb-4 fade-in text-white border-start border-4 border-danger ps-3">Hasil Pencarian: "isekai"</h3>
+                            <div class="row">
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/18/series-451-anilist-101547-114235-37bcafbe.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-cheat-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 5.2</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Cheat Magician</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.05s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/08/series-15-anilist-153845-234531-41ab8cd5.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=iseleve-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 6.3</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai de Cheat Skill wo Te ni Shita Ore wa</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.1s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/05/06/series-148974-anilist-152072-100436-7a26ebe8.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-de-mofumofu-nadenade-suru-tame-ni-ganbattemasu" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 6.6</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai de Mofumofu Nadenade suru Tame ni Ganbattemasu.</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.15s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/04/05/series-1222-anilist-97873-121606-00c69c74.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-zakaya-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.1</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Izakaya</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.2s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/27/series-663-anilist-101004-105310-e2c85ad3.png" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-the-maou-majutsu-subtitle-indonesia%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 6.6</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Maou to Shoukan Shoujo no Dorei Majutsu</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.25s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/15/series-303-anilist-117448-095604-4b18aa32.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=imsdm-s2-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 6.5</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Maou to Shoukan Shoujo no Dorei Majutsu Season 2</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.3s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://animekita.org/cover/Isekai-Meikyuu-de-Harem-wo-Sub-Indo.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-meikyuu-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.11</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Meikyuu de Harem wo</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.35s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://otakudesu.blog/wp-content/uploads/2025/07/Isekai-Mokushiroku-Mynoghra.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-mokushiroku-mynoghra-subtitle-indonesia" class="stretched-link"></a>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Ongoing</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Mokushiroku Mynoghra</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.4s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://cdn.myanimelist.net/images/anime/2/20345.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-no-seikishi-monogatari" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.72</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai no Seikishi Monogatari</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.45s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://cdn.myanimelist.net/images/anime/1983/132329.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-nonbiri-nouka-fixed" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.54</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Nonbiri Nouka</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.5s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/04/10/series-153607-anilist-197824-225713-1287ba25.png" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isenouka-s2-sub-indo" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.4</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Nonbiri Nouka Season 2</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.55s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/10/series-110-anilist-135806-120014-b48582c0.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-no-ojisan-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.6</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Ojisan</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.6s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/09/series-94-anilist-146234-111828-b614f3b5.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=one-turn-kill-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 6.0</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai One Turn Kill Neesan</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.65s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/15/series-294-anilist-104454-094633-dab285ad.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-quart-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.2</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Quartet</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.7s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://cdn.myanimelist.net/images/anime/1222/122000.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-quartet-movie-another-world" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.46</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Quartet Movie: Another World</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.75s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/29/series-822-anilist-110178-115623-f830ebbe.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-quart-season-2-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.2</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Quartet Season 2</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.8s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://otakudesu.blog/wp-content/uploads/2025/11/152103.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-quart-season-3-sub-indo" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.68</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Ongoing</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Quartet Season 3</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.85s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/05/19/series-149166-anilist-152137-121439-0dff2aa4.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-shikkaku" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.1</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Shikkaku</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.9s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/04/05/series-1177-anilist-97617-114620-421f5d0e.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-shoku-subtitle-indonesia%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.2</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Shokudou</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-6 col-md-3 mb-4 fade-in" style="animation-delay: 0.95s;">
+                            <div class="card h-100">
+                                <div class="card-img-wrapper">
+                                    <img src="https://assets.animekita.org/cover/2026/03/25/series-617-anilist-132806-200747-22465f23.jpg" class="card-img-top" alt="Cover" onerror="this.onerror=null;this.src='assets/no-cover.svg'">
+                                    <a href="?series=isekai-shoku-season-2-sub-indo%2F" class="stretched-link"></a>
+                                                                            <span class="position-absolute top-0 end-0 bg-dark text-warning px-2 py-1 small fw-bold m-2 rounded shadow-lg"><i class="fas fa-star"></i> 7.6</span>
+                                                                        <span class="position-absolute bottom-0 start-0 bg-danger text-white px-2 py-1 small fw-bold m-2 rounded shadow-lg">Completed</span>
+                                </div>
+                                <div class="card-body p-2 mt-1">
+                                    <h6 class="card-title text-truncate mb-1">Isekai Shokudou Season 2</h6>
+                                    <small class="text-muted">Anime</small>
+                                </div>
+                            </div>
+                        </div>
+                                    </div>
+            
+            </div>
+
+    <script async="async" data-cfasync="false" src="https://pl28555963.profitableratecpmnetwork.com/2d4340706978abf6c5d43f4711731ba2/invoke.js"></script>
+    <div id="container-2d4340706978abf6c5d43f4711731ba2"></div>
+
+    <!-- IKLAN: sebelum footer + slot mengambang (sidebar & mobile anchor) -->
+            <div class="container">
+                    </div>
+    
+    <!-- ===== TOP DONATUR: bawaan SEPANJANG MASA 5 nama, pengguna bisa pilih Bulan Ini ===== -->
+    <div class="container">
+        <style>
+.dw-wrap{margin:2.5rem 0 1rem;}
+.dw-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.dw-head h4{font-weight:700;font-size:1.05rem;margin:0;color:#fff;}
+.dw-head h4 i{color:#ffd700;}
+.dw-head .all{font-size:.8rem;color:#E50914;font-weight:600;text-decoration:none;white-space:nowrap;}
+.dw-head .all:hover{color:#ff5a60;}
+.dw-strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+.dw-strip::-webkit-scrollbar{height:4px;} .dw-strip::-webkit-scrollbar-thumb{background:#333;border-radius:4px;}
+.dw-item{display:flex;align-items:center;gap:10px;background:#1f1f1f;border:1px solid #2b2b2b;border-radius:12px;
+  padding:10px 16px 10px 12px;min-width:190px;flex:1 0 auto;transition:.2s;text-decoration:none;}
+.dw-item:hover{border-color:#3a3a40;transform:translateY(-2px);}
+.dw-item .md{font-size:1.4rem;line-height:1;flex-shrink:0;}
+.dw-item .tx{min-width:0;}
+.dw-item .nm{font-weight:600;font-size:.86rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+.dw-item .sub{font-size:.72rem;color:#a3a3a3;}
+.dw-item.i1{border-color:rgba(255,215,0,.45);} .dw-item.i1 .sub{color:#ffd700;}
+.dw-cta{display:inline-flex;align-items:center;gap:7px;background:rgba(229,9,20,.12);border:1px solid rgba(229,9,20,.35);
+  color:#ff8a90;font-size:.8rem;font-weight:600;padding:10px 16px;border-radius:12px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.dw-cta:hover{background:#E50914;color:#fff;border-color:#E50914;}
+/* tombol pilih periode */
+.dw-tabs{display:inline-flex;gap:4px;background:#1a1a1a;border:1px solid #2b2b2b;border-radius:8px;padding:3px;}
+.dw-tab{background:none;border:none;color:#9a9a9a;font-size:.74rem;font-weight:600;padding:4px 10px;
+  border-radius:6px;cursor:pointer;white-space:nowrap;transition:.15s;font-family:inherit;}
+.dw-tab:hover{color:#fff;}
+.dw-tab.on{background:#E50914;color:#fff;}
+.dw-kosong{color:#8b8b95;font-size:.82rem;padding:10px 2px;}
+@media(max-width:576px){ .dw-item{min-width:170px;padding:9px 13px 9px 10px;} .dw-head h4{font-size:.95rem;}
+  .dw-tab{font-size:.7rem;padding:4px 8px;} }
+</style>
+<div class="dw-wrap">
+  <div class="dw-head">
+    <h4><i class="fas fa-trophy"></i> Top Donatur <span id="dwJudul">Sepanjang Masa</span></h4>
+    <div class="d-flex align-items-center gap-2">
+      <div class="dw-tabs" role="group" aria-label="Pilih periode">
+        <button type="button" class="dw-tab on" id="dwTabAll"   onclick="dwPilih('all')">Sepanjang Masa</button>
+        <button type="button" class="dw-tab"    id="dwTabBulan" onclick="dwPilih('bulan')">Bulan Ini</button>
+      </div>
+      <a href="top-donate.php" class="all">Lihat Semua <i class="fas fa-chevron-right" style="font-size:.7rem;"></i></a>
+    </div>
+  </div>
+  <div class="dw-strip" id="dwAll"><a href="top-donate.php" class="dw-item i1"><span class="md">🥇</span><span class="tx"><span class="nm d-block">Fukurooo</span><span class="sub">Rp115.000</span></span></a><a href="top-donate.php" class="dw-item i2"><span class="md">🥈</span><span class="tx"><span class="nm d-block">Someone</span><span class="sub">Rp67.677</span></span></a><a href="top-donate.php" class="dw-item i3"><span class="md">🥉</span><span class="tx"><span class="nm d-block">Someone</span><span class="sub">Rp60.357</span></span></a><a href="top-donate.php" class="dw-item i4"><span class="md">🏅</span><span class="tx"><span class="nm d-block">@evilmagics</span><span class="sub">Rp25.000</span></span></a><a href="top-donate.php" class="dw-item i5"><span class="md">🏅</span><span class="tx"><span class="nm d-block">itsu</span><span class="sub">Rp20.000</span></span></a><a href="https://sociabuzz.com/ylnime/donate" target="_blank" rel="noopener" class="dw-cta"><i class="fas fa-heart"></i> Dukung Juga</a></div>  <div class="dw-strip" id="dwBulan" style="display:none"><a href="top-donate.php" class="dw-item i1"><span class="md">🥇</span><span class="tx"><span class="nm d-block">Fukurooo</span><span class="sub">Rp115.000</span></span></a><a href="top-donate.php" class="dw-item i2"><span class="md">🥈</span><span class="tx"><span class="nm d-block">@evilmagics</span><span class="sub">Rp25.000</span></span></a><a href="https://sociabuzz.com/ylnime/donate" target="_blank" rel="noopener" class="dw-cta"><i class="fas fa-heart"></i> Dukung Juga</a></div></div>
+<script>
+/* Berpindah periode murni di peramban: kedua daftar sudah dikirim bersama
+   halaman, jadi tidak ada permintaan ke server sama sekali. Pilihan diingat
+   lewat localStorage, dibungkus try/catch karena mode penyamaran bisa
+   menolak penyimpanan. */
+function dwPilih(p) {
+  var all = p === 'all';
+  document.getElementById('dwAll').style.display   = all ? '' : 'none';
+  document.getElementById('dwBulan').style.display = all ? 'none' : '';
+  document.getElementById('dwTabAll').classList.toggle('on', all);
+  document.getElementById('dwTabBulan').classList.toggle('on', !all);
+  document.getElementById('dwJudul').textContent = all ? 'Sepanjang Masa' : 'Bulan Ini';
+  try { localStorage.setItem('yl_dw_periode', p); } catch (e) {}
+}
+try {
+  if (localStorage.getItem('yl_dw_periode') === 'bulan') dwPilih('bulan');
+} catch (e) {}
+</script>
+    </div>
+
+    <footer>
+        <div class="container px-4">
+            <h4 class="fw-bold mb-4" style="color: #666;"><i class="fas fa-play text-danger me-2"></i>YLnime</h4>
+            <div class="row mb-5">
+                <div class="col-md-3 col-6 mb-3">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Investor Relations</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Jobs</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Account</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Ways to Watch</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none hover-underline">Corporate Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://discord.gg/TfZX9RCPNJ" target="_blank" class="text-decoration-none hover-underline"><i class="fab fa-discord me-1"></i> Join Discord</a></li>
+                        <li class="mb-2"><a href="https://t.me/ylnime" target="_blank" class="text-decoration-none hover-underline"><i class="fab fa-telegram me-1"></i> Join Telegram</a></li>
+                        <li class="mb-2"><a href="mailto:admin@ylnime.com" class="text-decoration-none hover-underline"><i class="fas fa-envelope me-1"></i> Contact Us</a></li>
+                        <li class="mb-2"><a href="contact.php" class="text-decoration-none hover-underline"><i class="fas fa-headset me-1"></i> Hubungi Kami</a></li>
+                        <li class="mb-2"><a href="top-donate.php" class="text-decoration-none hover-underline"><i class="fas fa-trophy me-1" style="color:#ffd700;"></i> Top Donatur</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ===== DONASI (footer, non-intrusif) ===== -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 py-3 mb-3"
+                 style="border-top:1px solid #222; border-bottom:1px solid #222;">
+                <div style="min-width:220px; flex:1;">
+                    <div class="fw-bold" style="color:#ddd; font-size:.95rem;">
+                        <i class="fas fa-heart me-2" style="color:#E50914;"></i>Dukung YLnime
+                    </div>
+                    <div class="small" style="color:#666;">Bantu biaya server &amp; pengembangan agar tetap gratis untuk semua.</div>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="https://sociabuzz.com/ylnime/donate" target="_blank" rel="noopener"
+                       class="text-decoration-none fw-bold"
+                       style="background:#E50914; color:#fff; padding:9px 20px; border-radius:30px; font-size:.85rem;">
+                        <i class="fas fa-hand-holding-heart me-1"></i> Donasi
+                    </a>
+                    <a href="top-donate.php" class="text-decoration-none fw-bold"
+                       style="background:rgba(255,255,255,.08); border:1px solid #333; color:#ccc; padding:9px 20px; border-radius:30px; font-size:.85rem;">
+                        <i class="fas fa-trophy me-1" style="color:#ffd700;"></i> Top Donatur
+                    </a>
+                </div>
+            </div>
+
+            <p class="small" style="color: #666;">&copy; 2026 YLnime Indonesia. Anime Streaming Platform.</p>
+        </div>
+    </footer>
+
+
+
+    <!-- +async: dulu skrip ini memblokir (butuh ~1,3 detik) sehingga indikator
+         "loading" di tab tidak kunjung berhenti. Iklannya tetap tampil.
+         Kalau ternyata iklan bermasalah, cukup hapus kata async di bawah. -->
+    <script async src="https://pl28564830.profitableratecpmnetwork.com/c7/dc/ac/c7dcac59d668374f5db170f51bbe8336.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Memaksa tema dark bawaan untuk estetika Netflix
+        const html = document.documentElement;
+        html.setAttribute('data-theme', 'dark');
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((reg) => console.log('Service Worker Registered'))
+                    .catch((err) => console.log('Service Worker Failed', err));
+            });
+        }
+
+        // --- UI Switch Popup (1x per day, after 10s scroll) ---
+        /*
+        (function() {
+            const POPUP_KEY = 'ylnime_ui_popup_shown';
+            const lastShown = localStorage.getItem(POPUP_KEY);
+            const now = Date.now();
+            const ONE_DAY = 86400000;
+            
+            // Only show if never shown or >1 day ago
+            if (lastShown && (now - parseInt(lastShown)) < ONE_DAY) return;
+            
+            let popupTimer = setTimeout(showUIPopup, 10000);
+            
+            function showUIPopup() {
+                // Don't show on series/episode pages
+                if (window.location.search.includes('series=') || window.location.search.includes('episode=')) return;
+                
+                const overlay = document.createElement('div');
+                overlay.id = 'uiSwitchOverlay';
+                overlay.innerHTML = `
+                    <div style="position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:99999;display:flex;align-items:flex-end;justify-content:center;animation:fadeInOverlay 0.3s ease;" onclick="closeUIPopup(event)">
+                        <div style="background:linear-gradient(135deg,#1f1f1f 0%,#141414 100%);border:1px solid #333;border-radius:20px 20px 0 0;padding:2rem 2rem 2.5rem;max-width:500px;width:100%;text-align:center;animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1);" onclick="event.stopPropagation()">
+                            <div style="width:40px;height:4px;background:#444;border-radius:4px;margin:0 auto 1.5rem;"></div>
+                            <div style="font-size:2rem;margin-bottom:0.8rem;">âœ¨</div>
+                            <h4 style="font-weight:700;color:#fff;margin-bottom:0.5rem;font-size:1.15rem;">Suka dengan tampilan baru?</h4>
+                            <p style="color:#a3a3a3;font-size:0.9rem;margin-bottom:1.5rem;line-height:1.5;">Kami telah memperbarui desain YLnime agar lebih nyaman dan modern. Ingin beralih ke tampilan lama?</p>
+                            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                                <button onclick="stayNewUI()" style="background:#E50914;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;transition:0.2s;flex:1;min-width:140px;">
+                                    <i class="fas fa-check me-1"></i> Tetap di Tampilan Baru
+                                </button>
+                                <button onclick="switchOldUI()" style="background:rgba(255,255,255,0.08);color:#ccc;border:1px solid #444;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;transition:0.2s;flex:1;min-width:140px;">
+                                    Tampilan Lama
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes fadeInOverlay { from{opacity:0} to{opacity:1} }
+                        @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+                    </style>
+                `;
+                document.body.appendChild(overlay);
+            }
+            
+            window.closeUIPopup = function(e) {
+                if (e) e.stopPropagation();
+                localStorage.setItem(POPUP_KEY, Date.now().toString());
+                const el = document.getElementById('uiSwitchOverlay');
+                if (el) el.remove();
+            };
+            window.stayNewUI = function() {
+                closeUIPopup();
+            };
+            window.switchOldUI = function() {
+                localStorage.setItem(POPUP_KEY, Date.now().toString());
+                // Redirect ke tampilan lama
+                window.location.href = 'default.php' + window.location.search;
+            };
+        })();
+        */
+    </script>
+    
+
+
+<!-- <<< MULAI: tempel kode Histats persis seperti yang mereka berikan >>> -->
+<style id="yl-histats-rapi">
+/* Perapi tampilan penghitung Histats.
+   MASALAH: Histats menaruh <div id="histats_counter"> langsung sebagai
+   anak <body> di paling bawah halaman, 0px di bawah footer, tanpa
+   container dan tanpa margin. Akibatnya canvas 173x33 mentok ke tepi
+   kiri layar, di atas latar #141414 (warna body) yang berbeda dari
+   footer #080808 - muncul sebagai strip asing. Di ponsel terlihat
+   seperti elemen rusak.
+   JEBAKAN: pemusatan WAJIB pakai text-align, BUKAN flexbox. Histats
+   memberi div dalamnya style="display:block" INLINE yang mengalahkan
+   aturan flex dari stylesheet, sehingga canvas tetap menempel di kiri. */
+#histats_counter{
+  width:100%; box-sizing:border-box; margin:0;
+  background:#080808;              /* samakan dengan footer */
+  text-align:center;
+  padding:0 12px 18px;             /* gutter sama dengan .container */
+  padding-bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+  line-height:0;
+}
+#histats_counter a{ display:inline-block; line-height:0; opacity:.6; transition:opacity .2s ease; }
+#histats_counter a:hover{ opacity:1; }
+#histats_counter canvas, #histats_counter img{ max-width:100%; height:auto; display:block; }
+</style>
+
+
+   <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5049072,4,3,170,30,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5049072&101" alt="hit tracker" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+
+<!-- <<< SELESAI: kode Histats >>> -->
+</body>
+
+</html>

@@ -1,10 +1,11 @@
 import { Router } from "express";
 import * as ctrl from "../controllers/sync.js";
+import { requireSyncSecret } from "../middlewares/requireSyncSecret.js";
 
 const router = Router();
 
-// Manual sync trigger
-router.post("/:source/:type", ctrl.syncSource);
+// Manual sync trigger — memicu scraping massal, jadi wajib pakai secret.
+router.post("/:source/:type", requireSyncSecret, ctrl.syncSource);
 
 // Sync status history
 router.get("/status", ctrl.getSyncStatus);

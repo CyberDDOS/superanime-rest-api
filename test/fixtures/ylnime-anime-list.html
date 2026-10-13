@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Anime A-Z Lengkap - YLnime</title>
+<meta name="description" content="Katalog lengkap semua judul anime di YLnime, diurutkan alfabet A sampai Z. Sub indo HD.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg-body:#141414;--bg-card:#1f1f1f;--text-primary:#fff;--text-secondary:#a3a3a3;--accent-color:#E50914;--accent-hover:#b20710;--border-color:#2b2b2b;--nav-bg:rgba(20,20,20,.95);}
+*{box-sizing:border-box;} body{background:var(--bg-body);color:var(--text-primary);font-family:'Poppins',sans-serif;overflow-x:hidden;min-height:100vh;}
+a{text-decoration:none;color:inherit;transition:.2s;} a:hover{color:var(--accent-color);}
+.navbar{background:var(--nav-bg);backdrop-filter:blur(15px);border-bottom:1px solid var(--border-color);padding:1rem 0;position:sticky;top:0;z-index:1000;}
+.navbar-brand{font-weight:700;font-size:1.5rem;color:var(--accent-color)!important;text-transform:uppercase;letter-spacing:1px;}
+.nav-link{color:#e5e5e5!important;font-weight:500;font-size:.88rem;margin:0 6px;} .nav-link:hover,.nav-link.active{color:var(--accent-color)!important;}
+.btn-primary{background:var(--accent-color);border:none;font-weight:600;border-radius:4px;} .btn-primary:hover{background:var(--accent-hover);}
+.avatar-circle{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--border-color);}
+.card{background:transparent;border:none;} .card-img-wrapper{border-radius:8px;overflow:hidden;position:relative;box-shadow:0 4px 6px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;}
+.card:hover .card-img-wrapper{transform:scale(1.06);z-index:10;box-shadow:0 15px 35px rgba(0,0,0,.9);}
+.card-img-top{height:280px;object-fit:cover;width:100%;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);}
+.card-title{color:#fff;font-weight:600;font-size:.85rem;margin-top:8px;} .card:hover .card-title{color:var(--accent-color);}
+.page-hero{padding:2rem 0 .5rem;} .page-hero h1{font-weight:800;letter-spacing:-1px;font-size:clamp(1.5rem,4vw,2.2rem);} .page-hero h1 .fa-solid,.page-hero h1 i{color:var(--accent-color);}
+.page-hero p{color:var(--text-secondary);}
+.badge-corner{position:absolute;top:0;end:0;right:0;background:var(--accent-color);color:#fff;font-size:.68rem;font-weight:700;padding:3px 8px;margin:8px;border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.5);z-index:5;}
+.pager{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:2.5rem 0;}
+.pager a,.pager span{padding:8px 16px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-card);color:#eee;font-weight:600;font-size:.9rem;}
+.pager a:hover{background:var(--accent-color);border-color:var(--accent-color);color:#fff;}
+.pager .cur{background:var(--accent-color);border-color:var(--accent-color);color:#fff;}
+.pager .disabled{opacity:.4;pointer-events:none;}
+.genre-pill{display:inline-block;background:rgba(255,255,255,.08);border:1px solid #333;color:#ccc;padding:7px 16px;border-radius:20px;font-size:.85rem;font-weight:500;margin:0 6px 8px 0;transition:.25s;}
+.genre-pill:hover{background:var(--accent-color);border-color:var(--accent-color);color:#fff;}
+.genre-pill.active{background:var(--accent-color);border-color:var(--accent-color);color:#fff;}
+.az-nav{position:sticky;top:78px;z-index:20;background:rgba(20,20,20,.9);backdrop-filter:blur(8px);padding:10px;border-radius:10px;border:1px solid var(--border-color);margin-bottom:20px;}
+.az-nav a{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:6px;font-weight:700;font-size:.8rem;color:#ccc;margin:2px;}
+.az-nav a:hover{background:var(--accent-color);color:#fff;}
+.az-letter{font-size:1.6rem;font-weight:800;color:var(--accent-color);border-bottom:2px solid var(--border-color);padding-bottom:6px;margin:24px 0 14px;scroll-margin-top:140px;}
+footer{background:#080808;border-top:1px solid #222;margin-top:4rem;padding:2.5rem 0;color:#777;text-align:center;font-size:.85rem;}
+@media(max-width:768px){.card-img-top{height:210px;}}
+</style>
+</head>
+<body>
+<style>
+/* ===== Navbar YLnime — ringkas di desktop, mudah dipindai di HP ===== */
+.yl-nav .nav-link{font-weight:500;padding:.5rem .85rem !important;white-space:nowrap;}
+.yl-nav .nav-link.active{color:#fff !important;font-weight:700;}
+.yl-nav .dropdown-menu{background:#141414;border:1px solid #333;border-radius:12px;
+  padding:8px;min-width:210px;box-shadow:0 12px 30px rgba(0,0,0,.55);}
+.yl-nav .dropdown-item{color:#ddd;border-radius:8px;padding:9px 12px;font-size:.9rem;}
+.yl-nav .dropdown-item:hover,.yl-nav .dropdown-item:focus{background:rgba(229,9,20,.16);color:#fff;}
+.yl-nav .dropdown-item.active{background:var(--accent-color,#E50914);color:#fff;}
+.yl-nav .dropdown-item i{width:20px;text-align:center;margin-right:8px;opacity:.85;}
+.yl-nav .nav-donasi{color:#ff8a90 !important;font-weight:700;}
+.yl-nav .nav-donasi:hover{color:#E50914 !important;}
+
+/* ===== Tampilan HP: grup dibuka jadi bagian, bukan menu bertingkat =====
+   Alasan: menu bertingkat di layar sempit butuh dua kali sentuh dan mudah
+   membingungkan. Dibuka langsung sebagai daftar bersekat lebih cepat dibaca. */
+@media (max-width: 991.98px){
+  /* PENTING: semua aturan di bawah dibatasi ke #ylNavMenu (menu utama) saja.
+     Kalau memakai ".yl-nav .dropdown-menu", menu PENGGUNA (avatar) ikut kena
+     display:block + position:static sehingga selalu terbuka dan mendorong
+     tata letak — dan pointer-events:none membuat avatar tak bisa diklik. */
+  #ylNavMenu .navbar-nav{padding-top:8px;}
+  #ylNavMenu .dropdown-toggle::after{display:none;}
+  #ylNavMenu .dropdown-toggle{pointer-events:none;font-size:.72rem;text-transform:uppercase;
+    letter-spacing:1px;color:#7a7a80 !important;font-weight:700;padding-bottom:2px !important;}
+  #ylNavMenu .dropdown-menu{display:block !important;position:static !important;float:none;
+    background:transparent !important;border:none !important;box-shadow:none !important;
+    padding:0 0 10px 4px;margin:0;min-width:0;}
+  #ylNavMenu .dropdown-item{padding:10px 10px;font-size:.95rem;}
+  #ylNavMenu .nav-item{border-bottom:1px solid rgba(255,255,255,.05);}
+  #ylNavMenu .nav-item:last-child{border-bottom:none;}
+  #ylNavMenu .nav-donasi{padding:12px 10px !important;}
+
+  /* Menu pengguna (avatar) tetap bekerja normal: tertutup sampai diketuk. */
+  .yl-nav .order-lg-3 .dropdown-menu{position:absolute !important;background:#141414 !important;
+    border:1px solid #333 !important;box-shadow:0 12px 30px rgba(0,0,0,.55) !important;}
+}
+</style>
+
+<nav class="navbar navbar-expand-lg yl-nav">
+  <div class="container">
+    <a class="navbar-brand" href="index.php"><i class="fas fa-play me-2"></i>YLnime</a>
+
+    <!-- Sisi kanan: lonceng + pengguna + tombol menu HP -->
+    <div class="d-flex align-items-center order-lg-3">
+          <link rel="stylesheet" href="assets/ylnime-v2.css">
+    <div class="ylnime-notif-wrap" id="ylnimeNotifWrap" data-logged="0" data-nick="">
+        <button class="ylnime-notif-btn" id="ylnimeNotifBtn" type="button" aria-label="Notifikasi diskusi" title="Notifikasi Diskusi">
+            <i class="fas fa-bell"></i>
+            <span class="ylnime-notif-badge" id="ylnimeNotifBadge">0</span>
+        </button>
+        <div class="ylnime-notif-panel" id="ylnimeNotifPanel">
+            <div class="ylnime-notif-head">
+                <span><i class="fas fa-comments me-2 text-danger"></i>Diskusi Terbaru</span>
+                <a href="chat8.php" class="ylnime-notif-all">Buka Forum</a>
+            </div>
+            <div class="ylnime-notif-list" id="ylnimeNotifList">
+                <div class="ylnime-notif-empty">Memuat...</div>
+            </div>
+            <div class="ylnime-notif-foot" id="ylnimeNotifFoot"></div>
+        </div>
+    </div>
+    <script src="assets/notif.js" defer></script>
+    <script>
+    /* PWA install prompt (halus, non-intrusif) */
+    (function(){
+        var KEY='ylnime_pwa_dismiss_v2';
+        var deferred=null;
+        window.addEventListener('beforeinstallprompt', function(e){
+            e.preventDefault(); deferred=e;
+            if (localStorage.getItem(KEY)) return;
+            setTimeout(showBanner, 8000);
+        });
+        function showBanner(){
+            if(!deferred || document.getElementById('ylnimePwa')) return;
+            var b=document.createElement('div');
+            b.id='ylnimePwa'; b.className='ylnime-pwa-banner';
+            b.innerHTML='<i class="fas fa-mobile-screen-button text-danger fa-lg"></i>'+
+                '<div class="ylp-txt"><b>Pasang YLnime</b><br>Akses cepat seperti aplikasi</div>'+
+                '<button class="ylp-install">Pasang</button>'+
+                '<button class="ylp-close" aria-label="Tutup">&times;</button>';
+            document.body.appendChild(b);
+            b.querySelector('.ylp-install').onclick=function(){
+                b.remove(); if(deferred){ deferred.prompt(); deferred=null; }
+                localStorage.setItem(KEY,'1');
+            };
+            b.querySelector('.ylp-close').onclick=function(){ b.remove(); localStorage.setItem(KEY,'1'); };
+        }
+    })();
+    </script>
+    
+              <a href="account.php" class="btn btn-primary btn-sm px-4 fw-bold rounded-1">Masuk</a>
+      
+      <button class="navbar-toggler ms-2 border-0 text-white" type="button"
+              data-bs-toggle="collapse" data-bs-target="#ylNavMenu" aria-label="Buka menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Menu utama -->
+    <div class="collapse navbar-collapse" id="ylNavMenu">
+      <ul class="navbar-nav ms-auto me-3">
+                              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active"
+                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                Jelajahi              </a>
+              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item "
+                         href="ongoing.php">
+                    <i class="fas fa-tower-broadcast"></i>Ongoing                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="completed.php">
+                    <i class="fas fa-circle-check"></i>Tamat                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="movies.php">
+                    <i class="fas fa-film"></i>Movie                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="genre.php">
+                    <i class="fas fa-layer-group"></i>Genre                  </a></li>
+                                  <li><a class="dropdown-item active"
+                         href="anime-list.php">
+                    <i class="fas fa-list"></i>Daftar A-Z                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="rekomendasi.php">
+                    <i class="fas fa-star"></i>Rekomendasi                  </a></li>
+                              </ul>
+            </li>
+                                        <li class="nav-item">
+              <a class="nav-link "
+                 href="jadwals.php">Jadwal</a>
+            </li>
+                                        <li class="nav-item">
+              <a class="nav-link "
+                 href="baru.php">Terbaru</a>
+            </li>
+                                        <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle "
+                 href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                Komunitas              </a>
+              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item "
+                         href="chat8.php">
+                    <i class="fas fa-comments"></i>Diskusi                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="polling.php">
+                    <i class="fas fa-trophy"></i>Polling                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="hyper.php">
+                    <i class="fas fa-fire"></i>TerHype                  </a></li>
+                                  <li><a class="dropdown-item "
+                         href="/werewolf/">
+                    <i class="fas fa-moon"></i>Werewolf                  </a></li>
+                              </ul>
+            </li>
+                  
+        <li class="nav-item">
+          <a class="nav-link nav-donasi" href="top-donate.php" title="Dukung YLnime">
+            <i class="fas fa-heart me-1"></i>Donasi
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="page-hero"><h1><i class="fas fa-list"></i> Daftar Anime A-Z</h1><p>Katalog lengkap semua judul anime — pilih huruf untuk melompat.</p></div>
+
+      <div class="az-nav mb-4">
+              <a href="anime-list.php?l=%23" class="" style="">#</a>
+              <a href="anime-list.php?l=A" class="" style="">A</a>
+              <a href="anime-list.php?l=B" class="" style="">B</a>
+              <a href="anime-list.php?l=C" class="" style="">C</a>
+              <a href="anime-list.php?l=D" class="" style="">D</a>
+              <a href="anime-list.php?l=E" class="" style="">E</a>
+              <a href="anime-list.php?l=F" class="" style="">F</a>
+              <a href="anime-list.php?l=G" class="" style="">G</a>
+              <a href="anime-list.php?l=H" class="" style="">H</a>
+              <a href="anime-list.php?l=I" class="active" style="background:var(--accent-color);color:#fff;">I</a>
+              <a href="anime-list.php?l=J" class="" style="">J</a>
+              <a href="anime-list.php?l=K" class="" style="">K</a>
+              <a href="anime-list.php?l=L" class="" style="">L</a>
+              <a href="anime-list.php?l=M" class="" style="">M</a>
+              <a href="anime-list.php?l=N" class="" style="">N</a>
+              <a href="anime-list.php?l=O" class="" style="">O</a>
+              <a href="anime-list.php?l=P" class="" style="">P</a>
+              <a href="anime-list.php?l=Q" class="" style="">Q</a>
+              <a href="anime-list.php?l=R" class="" style="">R</a>
+              <a href="anime-list.php?l=S" class="" style="">S</a>
+              <a href="anime-list.php?l=T" class="" style="">T</a>
+              <a href="anime-list.php?l=U" class="" style="">U</a>
+              <a href="anime-list.php?l=V" class="" style="">V</a>
+              <a href="anime-list.php?l=W" class="" style="">W</a>
+              <a href="anime-list.php?l=X" class="" style="">X</a>
+              <a href="anime-list.php?l=Y" class="" style="">Y</a>
+              <a href="anime-list.php?l=Z" class="" style="">Z</a>
+          </div>
+    <div class="az-letter" id="LI">I <span class="text-secondary" style="font-size:1rem;font-weight:500;">(136 judul)</span></div>
+          <div class="row">
+            <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/c0919df47dc106d4.webp" class="card-img-top" loading="lazy" alt="I Am The Blade" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-am-the-blade" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Am The Blade</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/78bc8203555d8b36.webp" class="card-img-top" loading="lazy" alt="I Am Ying Tai" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-am-ying-tai" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Am Ying Tai</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1371/149504l.jpg" class="card-img-top" loading="lazy" alt="I Byeol-e Pil-yohan" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-byeol-e-pil-yohan" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Byeol-e Pil-yohan</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/da6314a9bbad6add.webp" class="card-img-top" loading="lazy" alt="I Can Have Infinite Enlightenment" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-can-have-infinite-enlightenment" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Can Have Infinite Enlightenment</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/1669ea73537dadd0.webp" class="card-img-top" loading="lazy" alt="I Collect Waste in Heaven" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-collect-waste-in-heaven" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Collect Waste in Heaven</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/8045f23520b36a18.jpg" class="card-img-top" loading="lazy" alt="I Have Refined Qi For 3000 Years!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-have-refined-qi-for-3000-years" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Have Refined Qi For 3000 Years!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/30123783be71e2a2.jpg" class="card-img-top" loading="lazy" alt="I Picked Up An Attribute" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=i-picked-up-an-attribute" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I Picked Up An Attribute</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1555/134512l.jpg" class="card-img-top" loading="lazy" alt="I&#039;&#039;s Pure" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=is-pure" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">I&#039;&#039;s Pure</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/9/87056l.jpg" class="card-img-top" loading="lazy" alt="Ibara no Ou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ibara-no-ou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ibara no Ou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1912/157082l.jpg" class="card-img-top" loading="lazy" alt="Ibitte Konai Gibo to Gishi" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ibitte-konai-gibo-to-gishi" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ibitte Konai Gibo to Gishi</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/15/series-310-anilist-7088-100412-ed12ac44.png" class="card-img-top" loading="lazy" alt="Ichiban Ushiro no Daimaou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ichiban-ushiro-daimaou-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ichiban Ushiro no Daimaou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/09/series-1408-anilist-488-132836-2dd2e507.png" class="card-img-top" loading="lazy" alt="Ichigo Mashimaro" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ichigo-mashiro-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ichigo Mashimaro</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://otakudesu.blog/wp-content/uploads/2026/04/Ichijouma-Mankitsugurashi-Sub.jpg" class="card-img-top" loading="lazy" alt="Ichijouma Mankitsugurashi!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ichijouma-mankitsugurashi-sub-indo" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ichijouma Mankitsugurashi!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/06/series-1254-anilist-110350-131349-b4435e76.png" class="card-img-top" loading="lazy" alt="ID:Invaded" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=invade-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">ID:Invaded</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/04/series-148932-anilist-163329-212750-90cb7abd.jpg" class="card-img-top" loading="lazy" alt="Idaman Polsek Season 3 (Tokyo Revengers Season 3)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idaman-polsek-season-3-%28tokyo-revengers-season-3%29" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Idaman Polsek Season 3 (Tokyo Revengers Season 3)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1691/133569.jpg" class="card-img-top" loading="lazy" alt="Idaten Jump" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idaten-jump" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Idaten Jump</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1137/117403l.jpg" class="card-img-top" loading="lazy" alt="Idol Jihen" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idol-jihen" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Idol Jihen</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/6/80935l.jpg" class="card-img-top" loading="lazy" alt="Idol Memories" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idol-memories" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Idol Memories</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1390/90828l.jpg" class="card-img-top" loading="lazy" alt="IDOLiSH7" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idolish7" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IDOLiSH7</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1962/106361l.jpg" class="card-img-top" loading="lazy" alt="IDOLiSH7 Second Beat!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idolish7-second-beat" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IDOLiSH7 Second Beat!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1646/115723l.jpg" class="card-img-top" loading="lazy" alt="IDOLiSH7 Third Beat!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idolish7-third-beat" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IDOLiSH7 Third Beat!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1131/90676l.jpg" class="card-img-top" loading="lazy" alt="IDOLiSH7 Vibrato" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idolish7-vibrato" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IDOLiSH7 Vibrato</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1025/111962l.jpg" class="card-img-top" loading="lazy" alt="Idoly Pride" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=idoly-pride" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Idoly Pride</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/12/26250l.jpg" class="card-img-top" loading="lazy" alt="Ie Naki Ko Remy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ie-naki-ko-remy" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ie Naki Ko Remy</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1526/151643l.jpg" class="card-img-top" loading="lazy" alt="Igano Kabamaru" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=igano-kabamaru" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Igano Kabamaru</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/24/series-596-anilist-120697-135129-8deba5dd.jpg" class="card-img-top" loading="lazy" alt="Ijiranaide, Nagatoro-san" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ijiranaide-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ijiranaide, Nagatoro-san</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/16/series-391-anilist-140596-075857-a9e95bfe.jpg" class="card-img-top" loading="lazy" alt="Ijiranaide, Nagatoro-san Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ijiranaide-s2-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ijiranaide, Nagatoro-san Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/27/series-671-anilist-111324-110106-d91ee228.jpg" class="card-img-top" loading="lazy" alt="Ikebukuro West Gate Park" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikebukuro-gate-park-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikebukuro West Gate Park</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/5/19958l.jpg" class="card-img-top" loading="lazy" alt="Iketeru Futari" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iketeru-futari" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Iketeru Futari</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1097/133583l.jpg" class="card-img-top" loading="lazy" alt="Ikkitousen" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikkitousen" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikkitousen</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/6/85202l.jpg" class="card-img-top" loading="lazy" alt="Ikkitousen: Dragon Destiny" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikkitousen-dragon-destiny" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikkitousen: Dragon Destiny</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/22922l.jpg" class="card-img-top" loading="lazy" alt="Ikkitousen: Great Guardians" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikkitousen-great-guardians" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikkitousen: Great Guardians</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/18209l.jpg" class="card-img-top" loading="lazy" alt="Ikkitousen: Xtreme Xecutor" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikkitousen-xtreme-xecutor" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikkitousen: Xtreme Xecutor</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/6/74051l.jpg" class="card-img-top" loading="lazy" alt="Ikoku Meiro no Croisée The Animation" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikoku-meiro-no-croisee-the-animation" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikoku Meiro no Croisée The Animation</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1791/154233l.jpg" class="card-img-top" loading="lazy" alt="Ikoku Nikki" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ikoku-nikki-sub-indo" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ikoku Nikki</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1094/109008l.jpg" class="card-img-top" loading="lazy" alt="Ima, Soko ni Iru Boku" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ima-soko-ni-iru-boku" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ima, Soko ni Iru Boku</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1004/96669l.jpg" class="card-img-top" loading="lazy" alt="Imawa no Kuni no Alice" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=imawa-no-kuni-no-alice" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Imawa no Kuni no Alice</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/0046133a93e35036.jpg" class="card-img-top" loading="lazy" alt="Immemorial Love For You" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immemorial-love-for-you" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Immemorial Love For You</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/c1ad31e13aa05551.jpg" class="card-img-top" loading="lazy" alt="Immortal Tomb" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortal-tomb" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Immortal Tomb</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/b69add7389bd4b00.jpg" class="card-img-top" loading="lazy" alt="IMMORTALITY" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortality" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IMMORTALITY</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/b635ec633f173d09.webp" class="card-img-top" loading="lazy" alt="IMMORTALITY SEASON 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortality-season-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IMMORTALITY SEASON 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/24035016c2ba612f.webp" class="card-img-top" loading="lazy" alt="IMMORTALITY SEASON 3" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortality-season-3" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IMMORTALITY SEASON 3</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/e8243459ad01208e.webp" class="card-img-top" loading="lazy" alt="IMMORTALITY SEASON 4" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortality-season-4" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IMMORTALITY SEASON 4</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/f780c405e000227c.webp" class="card-img-top" loading="lazy" alt="IMMORTALITY SEASON 5" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortality-season-5" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IMMORTALITY SEASON 5</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/0af3d112db61b6e4.png" class="card-img-top" loading="lazy" alt="Immortals of the Godless" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=immortals-of-the-godless" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Immortals of the Godless</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/06/series-1299-anilist-98596-134614-c4b4b996.jpg" class="card-img-top" loading="lazy" alt="Imouto sae Ireba Ii" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=imouto-sae-ireba-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Imouto sae Ireba Ii</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/9/89847l.jpg" class="card-img-top" loading="lazy" alt="Imouto sae Ireba Ii. (ONA)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=imouto-sae-ireba-ii-ona" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Imouto sae Ireba Ii. (ONA)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://myanimelist.net/images/anime/1141/142503.jpg" class="card-img-top" loading="lazy" alt="In Progres-M01" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=in-progres-m01" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">In Progres-M01</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/02/series-1258-anilist-20488-202726-815c06b4.jpg" class="card-img-top" loading="lazy" alt="Inari, Konkon, Koi Iroha." onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inari-iroha-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inari, Konkon, Koi Iroha.</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/48959.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven Go" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-go" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven Go</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/3/60753l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven Go vs. Danball Senki W Movie" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-go-vs-danball-senki-w-movie" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven Go vs. Danball Senki W Movie</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1619/94705.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven Go: Chrono Stone" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-go-chrono-stonee" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven Go: Chrono Stone</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/49743l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven Go: Galaxy" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-go-galaxy" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven Go: Galaxy</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1615/146476l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven Go: Kyuukyoku no Kizuna Gryphon" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-go-kyuukyoku-no-kizuna-gryphon" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven Go: Kyuukyoku no Kizuna Gryphon</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1460/96891l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven: Ares no Tenbin" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-ares-no-tenbin" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven: Ares no Tenbin</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/3/62875l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven: Chou Jigen Dream Match" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-chou-jigen-dream-match" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven: Chou Jigen Dream Match</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1965/117638l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven: Orion no Kokuin" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-orion-no-kokuin" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven: Orion no Kokuin</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/12/31189l.jpg" class="card-img-top" loading="lazy" alt="Inazuma Eleven: Saikyou Gundan Ogre Shuurai" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inazuma-eleven-saikyou-gundan-ogre-shuurai" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inazuma Eleven: Saikyou Gundan Ogre Shuurai</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/02/9efe2726493a8b20.jpg" class="card-img-top" loading="lazy" alt="Incomparable Demon King" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=incomparable-demon-king" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Incomparable Demon King</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/47037l.jpg" class="card-img-top" loading="lazy" alt="Inferno Cop" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inferno-cop" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inferno Cop</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/23/series-524-anilist-107420-235846-b380e667.jpg" class="card-img-top" loading="lazy" alt="Infinite Dendrogram" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=infinite-drogram-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Infinite Dendrogram</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/02/series-1035-anilist-9041-191853-c568d1c7.jpg" class="card-img-top" loading="lazy" alt="Infinite Stratos" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=infinite-stats-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Infinite Stratos</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1944/93421l.jpg" class="card-img-top" loading="lazy" alt="Ingress the Animation" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ingress-the-animation" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ingress the Animation</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1563/119898.jpg" class="card-img-top" loading="lazy" alt="Initial D Fifth Stage (Season 5)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-fifth-stage" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D Fifth Stage (Season 5)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1404/101364.jpg" class="card-img-top" loading="lazy" alt="Initial D Final Stage (Season 6)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-final-stage-2-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D Final Stage (Season 6)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1384/127972.jpg" class="card-img-top" loading="lazy" alt="Initial D First Stage (Season 1)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-first-stage-1-1" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D First Stage (Season 1)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/03/series-148912-anilist-18-205859-58801a7a.jpg" class="card-img-top" loading="lazy" alt="Initial D Fourth Stage (Season 4)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-fourth-stage-%28season-4%29" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D Fourth Stage (Season 4)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/8/12750.jpg" class="card-img-top" loading="lazy" alt="Initial D Second Stage (Season 2)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-second-stage-2-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D Second Stage (Season 2)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/13/40397.jpg" class="card-img-top" loading="lazy" alt="Initial D Third Stage (Season 3)" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=initial-d-third-stage-2-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Initial D Third Stage (Season 3)</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/18/series-477-anilist-20646-115253-48f6fb3b.jpg" class="card-img-top" loading="lazy" alt="Inou-Battle wa Nichijou-kei no Naka de" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inou-wa-battle-nichijou-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inou-Battle wa Nichijou-kei no Naka de</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/12/series-226-anilist-146346-150300-f0d08cca.png" class="card-img-top" loading="lazy" alt="Inu ni Nattara Suki na Hito ni Hirowareta" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inu-suki-hirowareta-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inu ni Nattara Suki na Hito ni Hirowareta</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/13/56313l.jpg" class="card-img-top" loading="lazy" alt="Inu to Hasami wa Tsukaiyou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inu-to-hasami-wa-tsukaiyou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inu to Hasami wa Tsukaiyou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1332/109356l.jpg" class="card-img-top" loading="lazy" alt="Inu to Neko Docchi mo Katteru to Mainichi Tanoshii" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inu-to-neko-docchi-mo-katteru-to-mainichi-tanoshii" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inu to Neko Docchi mo Katteru to Mainichi Tanoshii</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/31/series-927-anilist-11013-104433-dd1e7715.jpg" class="card-img-top" loading="lazy" alt="Inu x Boku SS" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inu-x-boku-ss" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inu x Boku SS</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1682/121461l.jpg" class="card-img-top" loading="lazy" alt="Inu-Ou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inu-ou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inu-Ou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/4/61921l.jpg" class="card-img-top" loading="lazy" alt="Inugami-san to Nekoyama-san" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inugami-san-to-nekoyama-san" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inugami-san to Nekoyama-san</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1016/115623l.jpg" class="card-img-top" loading="lazy" alt="Inugami-san to Nekoyama-san: Nekoyama-san to Onsen Ryokou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inugami-san-to-nekoyama-san-nekoyama-san-to-onsen-ryokou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inugami-san to Nekoyama-san: Nekoyama-san to Onsen Ryokou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1405/110246l.jpg" class="card-img-top" loading="lazy" alt="Inukami!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inukami" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inukami!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1/2268l.jpg" class="card-img-top" loading="lazy" alt="Inukami! The Movie: Tokumei Reiteki Sousakan Karina Shirou!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inukami-the-movie-tokumei-reiteki-sousakan-karina-shirou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inukami! The Movie: Tokumei Reiteki Sousakan Karina Shirou!</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1589/95329.jpg" class="card-img-top" loading="lazy" alt="InuYasha" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyasha-2-fix" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">InuYasha</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1683/94370l.jpg" class="card-img-top" loading="lazy" alt="InuYasha Movie 1: Toki wo Koeru Omoi" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyasha-movie-1-toki-wo-koeru-omoi" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">InuYasha Movie 1: Toki wo Koeru Omoi</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1162/92219l.jpg" class="card-img-top" loading="lazy" alt="InuYasha Movie 2: Kagami no Naka no Mugenjou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyasha-movie-2-kagami-no-naka-no-mugenjou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">InuYasha Movie 2: Kagami no Naka no Mugenjou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1658/95332l.jpg" class="card-img-top" loading="lazy" alt="InuYasha Movie 3: Tenka Hadou no Ken" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyasha-movie-3-tenka-hadou-no-ken" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">InuYasha Movie 3: Tenka Hadou no Ken</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1216/94369l.jpg" class="card-img-top" loading="lazy" alt="InuYasha Movie 4: Guren no Houraijima" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyasha-movie-4-guren-no-houraijima" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">InuYasha Movie 4: Guren no Houraijima</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/03/series-1060-anilist-97922-192715-5e4e10fc.jpg" class="card-img-top" loading="lazy" alt="Inuyashiki" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=inuyashik-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Inuyashiki</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1501/111468l.jpg" class="card-img-top" loading="lazy" alt="Ippon Bouchou Mantarou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ippon-bouchou-mantarou" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ippon Bouchou Mantarou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1193/112905l.jpg" class="card-img-top" loading="lazy" alt="Iria: Zeiram The Animation" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iria-zeiram-the-animation" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Iria: Zeiram The Animation</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1108/94990l.jpg" class="card-img-top" loading="lazy" alt="Iriya no Sora, UFO no Natsu" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iriya-no-sora-ufo-no-natsu" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Iriya no Sora, UFO no Natsu</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1635/120395l.jpg" class="card-img-top" loading="lazy" alt="Irodorimidori" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=irodorimidori" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Irodorimidori</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/16/series-378-anilist-101316-075100-e3a1c494.png" class="card-img-top" loading="lazy" alt="Irozuku Sekai no Ashita kara" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=irozuku-sekai-ashita-kara-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Irozuku Sekai no Ashita kara</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/3/9131l.jpg" class="card-img-top" loading="lazy" alt="Irregular Hunter X: The Day of Sigma" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=irregular-hunter-x-the-day-of-sigma" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Irregular Hunter X: The Day of Sigma</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/25/series-644-anilist-18247-201649-31bdf40e.jpg" class="card-img-top" loading="lazy" alt="IS: Infinite Stratos Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=infinite-stros-2-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">IS: Infinite Stratos Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/18/series-451-anilist-101547-114235-37bcafbe.jpg" class="card-img-top" loading="lazy" alt="Isekai Cheat Magician" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-cheat-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Cheat Magician</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/08/series-15-anilist-153845-234531-41ab8cd5.jpg" class="card-img-top" loading="lazy" alt="Isekai de Cheat Skill wo Te ni Shita Ore wa" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iseleve-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai de Cheat Skill wo Te ni Shita Ore wa</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/06/series-148974-anilist-152072-100436-7a26ebe8.jpg" class="card-img-top" loading="lazy" alt="Isekai de Mofumofu Nadenade suru Tame ni Ganbattemasu." onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-de-mofumofu-nadenade-suru-tame-ni-ganbattemasu" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai de Mofumofu Nadenade suru Tame ni Ganbattemasu.</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/05/series-1222-anilist-97873-121606-00c69c74.jpg" class="card-img-top" loading="lazy" alt="Isekai Izakaya" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-zakaya-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Izakaya</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/27/series-663-anilist-101004-105310-e2c85ad3.png" class="card-img-top" loading="lazy" alt="Isekai Maou to Shoukan Shoujo no Dorei Majutsu" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-the-maou-majutsu-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Maou to Shoukan Shoujo no Dorei Majutsu</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/15/series-303-anilist-117448-095604-4b18aa32.jpg" class="card-img-top" loading="lazy" alt="Isekai Maou to Shoukan Shoujo no Dorei Majutsu Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=imsdm-s2-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Maou to Shoukan Shoujo no Dorei Majutsu Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://animekita.org/cover/Isekai-Meikyuu-de-Harem-wo-Sub-Indo.jpg" class="card-img-top" loading="lazy" alt="Isekai Meikyuu de Harem wo" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-meikyuu-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Meikyuu de Harem wo</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://otakudesu.blog/wp-content/uploads/2025/07/Isekai-Mokushiroku-Mynoghra.jpg" class="card-img-top" loading="lazy" alt="Isekai Mokushiroku Mynoghra" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-mokushiroku-mynoghra-subtitle-indonesia" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Mokushiroku Mynoghra</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/2/20345.jpg" class="card-img-top" loading="lazy" alt="Isekai no Seikishi Monogatari" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-no-seikishi-monogatari" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai no Seikishi Monogatari</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1983/132329.jpg" class="card-img-top" loading="lazy" alt="Isekai Nonbiri Nouka" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-nonbiri-nouka-fixed" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Nonbiri Nouka</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/10/series-153607-anilist-197824-225713-1287ba25.png" class="card-img-top" loading="lazy" alt="Isekai Nonbiri Nouka Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isenouka-s2-sub-indo" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Nonbiri Nouka Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/10/series-110-anilist-135806-120014-b48582c0.jpg" class="card-img-top" loading="lazy" alt="Isekai Ojisan" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-no-ojisan-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Ojisan</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/09/series-94-anilist-146234-111828-b614f3b5.jpg" class="card-img-top" loading="lazy" alt="Isekai One Turn Kill Neesan" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=one-turn-kill-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai One Turn Kill Neesan</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/15/series-294-anilist-104454-094633-dab285ad.jpg" class="card-img-top" loading="lazy" alt="Isekai Quartet" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-quart-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Quartet</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1222/122000.jpg" class="card-img-top" loading="lazy" alt="Isekai Quartet Movie: Another World" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-quartet-movie-another-world" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Quartet Movie: Another World</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/29/series-822-anilist-110178-115623-f830ebbe.jpg" class="card-img-top" loading="lazy" alt="Isekai Quartet Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-quart-season-2-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Quartet Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://otakudesu.blog/wp-content/uploads/2025/11/152103.jpg" class="card-img-top" loading="lazy" alt="Isekai Quartet Season 3" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-quart-season-3-sub-indo" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Quartet Season 3</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/19/series-149166-anilist-152137-121439-0dff2aa4.jpg" class="card-img-top" loading="lazy" alt="Isekai Shikkaku" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-shikkaku" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Shikkaku</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/05/series-1177-anilist-97617-114620-421f5d0e.jpg" class="card-img-top" loading="lazy" alt="Isekai Shokudou" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-shoku-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Shokudou</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/25/series-617-anilist-132806-200747-22465f23.jpg" class="card-img-top" loading="lazy" alt="Isekai Shokudou Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-shoku-season-2-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Shokudou Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/08/series-11-anilist-140754-233819-0bf8accc.png" class="card-img-top" loading="lazy" alt="Isekai Shoukan wa Nidome desu" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isenido-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Shoukan wa Nidome desu</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/18/series-149136-anilist-166710-135024-791a260d.jpg" class="card-img-top" loading="lazy" alt="Isekai Suicide Squad" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-suicide-squad" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Suicide Squad</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/27/series-680-anilist-98491-110435-c116ea27.jpg" class="card-img-top" loading="lazy" alt="Isekai wa Smartphone to Tomo ni" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-smartphone-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai wa Smartphone to Tomo ni</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/08/series-4-anilist-147571-213718-6f75ee28.png" class="card-img-top" loading="lazy" alt="Isekai wa Smartphone to Tomo ni Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-wa-smartphone-to-tomo-ni-season-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai wa Smartphone to Tomo ni Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/18/series-483-anilist-136707-115835-77ff2708.jpg" class="card-img-top" loading="lazy" alt="Isekai Yakkyoku" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-yakkyoku-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Yakkyoku</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/19/series-149178-anilist-171031-122214-8ae7d426.jpg" class="card-img-top" loading="lazy" alt="Isekai Yururi Kikou: Kosodateshinagara Boukensha Shimasu" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isekai-yururi-kikou-kosodateshinagara-boukensha-shimasu" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isekai Yururi Kikou: Kosodateshinagara Boukensha Shimasu</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1364/140875.jpg" class="card-img-top" loading="lazy" alt="Ishura" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ishura-2" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ishura</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1699/146979.jpg" class="card-img-top" loading="lazy" alt="Ishura Season 2" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ishura-2nd-season" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ishura Season 2</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/05/series-1161-anilist-21712-113609-febbe955.jpg" class="card-img-top" loading="lazy" alt="Island" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=landis-subtitle-indonesia%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Island</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/03/15/series-296-anilist-20527-094719-786ecf52.png" class="card-img-top" loading="lazy" alt="Isshuukan Friends" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isshuukan-friends%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isshuukan Friends</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/03/series-1140-anilist-20746-204709-dedd349e.jpg" class="card-img-top" loading="lazy" alt="Isuca" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=isca-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Isuca</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1998/105349l.jpg" class="card-img-top" loading="lazy" alt="It&#039;s My Life" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=its-my-life" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">It&#039;s My Life</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/3/89169l.jpg" class="card-img-top" loading="lazy" alt="Itazura Majo to Nemuranai Machi" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itazura-majo-to-nemuranai-machi" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itazura Majo to Nemuranai Machi</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/10/19933l.jpg" class="card-img-top" loading="lazy" alt="Itazura na Kiss" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itazura-na-kiss" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itazura na Kiss</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/05/03/series-148918-anilist-99940-221245-edfca301.jpg" class="card-img-top" loading="lazy" alt="Itou Junji: Collection" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itou-junji%3A-collection" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itou Junji: Collection</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1956/132879l.jpg" class="card-img-top" loading="lazy" alt="Itou Junji: Maniac" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itou-junji%3A-maniac" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itou Junji: Maniac</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1015/123541l.jpg" class="card-img-top" loading="lazy" alt="Itsudatte Bokura no Koi wa 10 cm Datta." onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itsudatte-bokura-no-koi-wa-10-cm-datta" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itsudatte Bokura no Koi wa 10 cm Datta.</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1104/112106l.jpg" class="card-img-top" loading="lazy" alt="Itsuka Aeru Kimi ni" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itsuka-aeru-kimi-ni" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itsuka Aeru Kimi ni</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/5/75197l.jpg" class="card-img-top" loading="lazy" alt="Itsuka Tenma no Kuro Usagi" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=itsuka-tenma-no-kuro-usagi" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Itsuka Tenma no Kuro Usagi</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://assets.animekita.org/cover/2026/04/03/series-1123-anilist-117757-203708-d2588ebe.png" class="card-img-top" loading="lazy" alt="Iwa Kakeru" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iwa-kakeru-sub-indo%2F" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Iwa Kakeru</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1112/158450l.jpg" class="card-img-top" loading="lazy" alt="Iwamoto-senpai no Suisen" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iwamoto-suisen-sub-indo" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Iwamoto-senpai no Suisen</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/8/42863l.jpg" class="card-img-top" loading="lazy" alt="Ixion Saga DT" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=ixion-saga-dt" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Ixion Saga DT</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1431/146222.jpg" class="card-img-top" loading="lazy" alt="Izure Saikyou no Renkinjutsushi?" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=izure-saikyou-no-renkinjutsushi" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">Izure Saikyou no Renkinjutsushi?</h6>
+        </div>
+      </div>
+    </div>
+        <div class="col-6 col-md-3 col-lg-2 mb-4">
+      <div class="card h-100">
+        <div class="card-img-wrapper">
+                                <img src="https://cdn.myanimelist.net/images/anime/1661/141440l.jpg" class="card-img-top" loading="lazy" alt="i☆Ris the Movie: Full Energy!!" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#1a1a1a,#2a2a2a)';">
+                    <a href="index.php?series=iris-the-movie-full-energy" class="stretched-link"></a>
+        </div>
+        <div class="card-body p-0 mt-2 text-center">
+          <h6 class="card-title text-truncate mb-0 px-1">i☆Ris the Movie: Full Energy!!</h6>
+        </div>
+      </div>
+    </div>
+          </div>
+      </div>
+<footer><div class="container"><h5 class="fw-bold mb-2" style="color:#666;"><i class="fas fa-play text-danger me-2"></i>YLnime</h5>
+<p class="mb-0">&copy; 2026 YLnime — Nonton Anime Sub Indo HD Gratis.</p></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <<< MULAI: tempel kode Histats persis seperti yang mereka berikan >>> -->
+<style id="yl-histats-rapi">
+/* Perapi tampilan penghitung Histats.
+   MASALAH: Histats menaruh <div id="histats_counter"> langsung sebagai
+   anak <body> di paling bawah halaman, 0px di bawah footer, tanpa
+   container dan tanpa margin. Akibatnya canvas 173x33 mentok ke tepi
+   kiri layar, di atas latar #141414 (warna body) yang berbeda dari
+   footer #080808 - muncul sebagai strip asing. Di ponsel terlihat
+   seperti elemen rusak.
+   JEBAKAN: pemusatan WAJIB pakai text-align, BUKAN flexbox. Histats
+   memberi div dalamnya style="display:block" INLINE yang mengalahkan
+   aturan flex dari stylesheet, sehingga canvas tetap menempel di kiri. */
+#histats_counter{
+  width:100%; box-sizing:border-box; margin:0;
+  background:#080808;              /* samakan dengan footer */
+  text-align:center;
+  padding:0 12px 18px;             /* gutter sama dengan .container */
+  padding-bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+  line-height:0;
+}
+#histats_counter a{ display:inline-block; line-height:0; opacity:.6; transition:opacity .2s ease; }
+#histats_counter a:hover{ opacity:1; }
+#histats_counter canvas, #histats_counter img{ max-width:100%; height:auto; display:block; }
+</style>
+
+
+   <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5049072,4,3,170,30,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5049072&101" alt="hit tracker" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+
+<!-- <<< SELESAI: kode Histats >>> -->
+</body></html>
