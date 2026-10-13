@@ -88,15 +88,25 @@ export function isUnembeddable(url: string): boolean {
 	}
 }
 
-export async function resolvePlayerUrl(url: string): Promise<string> {
+/**
+ * URL googlevideo dari pemutar desustream terikat ke User-Agent yang memintanya
+ * (diputar dengan UA lain → 403), dan desustream meng-cache-nya per UA. Karena
+ * itu route `/otakudesu/play` memanggil ini tiap kali video diputar, dengan UA
+ * browser penonton, dan hasilnya tidak di-cache.
+ */
+export async function resolvePlayerUrl(url: string, userAgent?: string): Promise<string> {
 	if (!isUnembeddable(url)) return url;
 
 	try {
-		const html = await fetchText(url, `${BASE}/`, 8_000);
+		// Membuat URL baru di sisi desustream bisa makan ~3 detik.
+		const html = await fetchText(url, `${BASE}/`, 15_000, userAgent || undefined);
 		const match =
 			html.match(/videoURL\s*=\s*["']([^"']+)["']/) ??
+			// Pemutar "desuwatch" memakai <source> ke googlevideo.com/videoplayback
+			// (Blogger) yang tidak berakhiran .mp4.
+			html.match(/<source[^>]+src=["'](https?:\/\/[^"']+)["']/i) ??
 			html.match(/["'](https?:\/\/[^"']+\.(?:mp4|webm)(?:\?[^"']*)?)["']/i);
-		return match?.[1] ?? url;
+		return match?.[1]?.replace(/&amp;/g, "&") ?? url;
 	} catch {
 		return url;
 	}

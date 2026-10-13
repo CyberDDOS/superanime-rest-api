@@ -26,6 +26,8 @@ router.get("/episode/:episodeId", serverCache(10), ctrl.getEpisodeDetails);
 
 // Server — GET + POST
 router.get("/server/:serverId", serverCache(5), ctrl.getServerDetails);
+// Tanpa cache: URL video desustream dirotasi (lihat scraper.resolvePlayerUrl).
+router.get("/play/:file", ctrl.playVideo);
 router.post("/server/:serverId", serverCache(5), ctrl.getServerDetails);
 
 export default router;

@@ -224,10 +224,9 @@ export async function getEpisodeDetails(
 	try {
 		const { episodeId } = req.params;
 		const doc = await scraper.scrapeEpisodeDOM(String(episodeId));
+		// URL desustream sengaja tidak di-resolve di sini (respons ini di-cache);
+		// frontend memutarnya lewat `/otakudesu/play`.
 		const data = parser.parseEpisodeDetails(doc);
-		if (data.defaultStreaming) {
-			data.defaultStreaming = await scraper.resolvePlayerUrl(data.defaultStreaming);
-		}
 		res.json(setPayload(res, { data }));
 	} catch (err) {
 		next(err);
@@ -287,13 +286,30 @@ export async function getServerDetails(
 			throw new BadGatewayError("Server stream URL not found");
 		}
 
-		const url = await scraper.resolvePlayerUrl(embedUrl);
-		if (scraper.isUnembeddable(url)) {
+		const data = { title: `Server ${body.q || decoded.id}`, url: embedUrl };
+		res.json(setPayload(res, { data }));
+	} catch (err) {
+		next(err);
+	}
+}
+
+/**
+ * Putar pemutar desustream (yang menolak di-iframe) sebagai file video:
+ * ambil URL video terbarunya lalu redirect. `:file` hanya nama supaya URL
+ * berakhiran .mp4 dan diputar dengan <video>.
+ */
+export async function playVideo(req: Request, res: Response, next: NextFunction) {
+	try {
+		const url = typeof req.query.url === "string" ? req.query.url : "";
+		if (!scraper.isUnembeddable(url)) throw new BadRequestError("Query 'url' must be a desustream player URL");
+
+		const videoUrl = await scraper.resolvePlayerUrl(url, req.get("user-agent"));
+		if (scraper.isUnembeddable(videoUrl)) {
 			throw new BadGatewayError("Server ini tidak bisa diputar di luar Otakudesu. Pilih server lain.");
 		}
 
-		const data = { title: `Server ${body.q || decoded.id}`, url };
-		res.json(setPayload(res, { data }));
+		res.setHeader("Cache-Control", "no-store");
+		res.redirect(302, videoUrl);
 	} catch (err) {
 		next(err);
 	}

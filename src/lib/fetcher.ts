@@ -198,13 +198,14 @@ export async function fetchText(
 	url: string,
 	ref?: string,
 	timeout = 15_000,
+	userAgent = DEFAULT_USER_AGENT,
 ): Promise<string> {
 	const controller = new AbortController();
 	const timer = setTimeout(() => controller.abort(), timeout);
 
 	try {
 		const headers: Record<string, string> = {
-			"User-Agent": DEFAULT_USER_AGENT,
+			"User-Agent": userAgent,
 		};
 		if (ref) headers.Referer = ref;
 
