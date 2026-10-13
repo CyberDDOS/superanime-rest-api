@@ -213,7 +213,10 @@ export async function searchAnimes(
 ) {
 	try {
 		const q = getSearchQuery(req.query);
-		const doc = await scraper.scrapeDOM(`/?s=${encodeURIComponent(q)}`);
+		const page = getPageFromQuery(req.query);
+		// Pencarian WordPress dipecah 10 judul per halaman: /page/N/?s=…
+		const prefix = page && page !== "1" ? `/page/${page}` : "";
+		const doc = await scraper.scrapeDOM(`${prefix}/?s=${encodeURIComponent(q)}`);
 		const data = parser.parseAnimeByGenre(doc);
 		const pagination = parser.parsePagination(doc);
 		res.json(setPayload(res, { data, pagination }));

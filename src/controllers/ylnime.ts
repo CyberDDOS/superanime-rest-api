@@ -4,6 +4,7 @@ import * as parser from "../parsers/ylnime.js";
 import { setPayload } from "../lib/response.js";
 import { BadGatewayError, BadRequestError, NotFoundError } from "../lib/errors.js";
 import { paginateAnimeList } from "../lib/anime-list.js";
+import { cachedAsync } from "../lib/async-cache.js";
 import type { YLnime } from "../types/index.js";
 
 function getPage(query: Record<string, unknown>): number {
@@ -125,13 +126,70 @@ export async function getAnimesByGenre(req: Request, res: Response, next: NextFu
 	}
 }
 
+/** Pencarian bawaan YLnime selalu berhenti di 20 judul, tanpa halaman berikutnya. */
+const SEARCH_LIMIT = 20;
+const CATALOG_INITIALS = ["#", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+const CATALOG_TTL = 60 * 60 * 1000;
+const CATALOG_CONCURRENCY = 6;
+
+/** Seluruh katalog A-Z (tiap huruf satu halaman penuh), di-cache satu jam. */
+function getCatalog(): Promise<YLnime.AnimeCard[]> {
+	return cachedAsync(
+		"catalog:ylnime",
+		async () => {
+			const pages: YLnime.AnimeCard[][] = [];
+			for (let i = 0; i < CATALOG_INITIALS.length; i += CATALOG_CONCURRENCY) {
+				const batch = CATALOG_INITIALS.slice(i, i + CATALOG_CONCURRENCY).map(async (initial) => {
+					try {
+						const doc = await scraper.scrapeDOM(`anime-list.php?l=${encodeURIComponent(initial)}`);
+						return parser.parseCards(doc);
+					} catch {
+						return [];
+					}
+				});
+				pages.push(...(await Promise.all(batch)));
+			}
+
+			const catalog = pages.flat();
+			if (!catalog.length) throw new BadGatewayError("Failed to load YLnime catalog");
+			return catalog;
+		},
+		CATALOG_TTL,
+	);
+}
+
+const normalize = (text: string): string =>
+	text.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
+
 export async function searchAnimes(req: Request, res: Response, next: NextFunction) {
 	try {
 		const q = typeof req.query.q === "string" ? req.query.q.trim() : "";
 		if (!q || q.length > 50) throw new BadRequestError("Invalid search query");
 
-		const data = parser.parseCards(await scraper.scrapeDOM(`index.php?search=${encodeURIComponent(q)}`));
-		res.json(setPayload(res, { data }));
+		let results: YLnime.AnimeCard[] = [];
+		try {
+			results = parser.parseCards(await scraper.scrapeDOM(`index.php?search=${encodeURIComponent(q)}`));
+		} catch (err) {
+			if (!(err instanceof NotFoundError)) throw err;
+		}
+
+		// Kurang dari batas berarti hasilnya sudah lengkap. Kalau tepat di batas,
+		// sisanya dicari dari katalog A-Z: semua kata kunci harus ada di judul.
+		if (results.length >= SEARCH_LIMIT) {
+			const words = normalize(q).split(" ").filter(Boolean);
+			const seen = new Set(results.map((card) => card.slug));
+			for (const card of await getCatalog()) {
+				if (seen.has(card.slug)) continue;
+				const title = normalize(card.title);
+				if (words.every((word) => title.includes(word))) {
+					seen.add(card.slug);
+					results.push(card);
+				}
+			}
+		}
+
+		if (!results.length) throw new NotFoundError("No anime found");
+		res.json(setPayload(res, { data: results }));
 	} catch (err) {
 		next(err);
 	}
