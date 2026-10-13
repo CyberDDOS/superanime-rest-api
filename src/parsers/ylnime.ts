@@ -11,15 +11,19 @@ export const toSeriesToken = (slug: string): string =>
 export const fromSeriesToken = (token: string): string =>
 	token.replace(/~$/, "/").replace(/~q/g, "?").replace(/~h/g, "#");
 
-/** Halaman episode butuh slug series, jadi keduanya digabung dalam satu token. */
+/**
+ * Halaman episode butuh slug series, jadi keduanya digabung dalam satu token.
+ * Id episode bisa juga diakhiri "/" (mis. `ysysn-episode-1-sub-indo/`), jadi
+ * ikut dikodekan seperti slug series.
+ */
 const EPISODE_SEPARATOR = "__";
 export const toEpisodeToken = (episodeId: string, seriesSlug: string): string =>
-	`${episodeId}${EPISODE_SEPARATOR}${toSeriesToken(seriesSlug)}`;
+	`${toSeriesToken(episodeId)}${EPISODE_SEPARATOR}${toSeriesToken(seriesSlug)}`;
 export const fromEpisodeToken = (token: string): { episodeId: string; seriesSlug: string } => {
 	const index = token.indexOf(EPISODE_SEPARATOR);
 	if (index <= 0) return { episodeId: token, seriesSlug: "" };
 	return {
-		episodeId: token.slice(0, index),
+		episodeId: fromSeriesToken(token.slice(0, index)),
 		seriesSlug: fromSeriesToken(token.slice(index + EPISODE_SEPARATOR.length)),
 	};
 };
