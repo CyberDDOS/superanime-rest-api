@@ -94,7 +94,7 @@ Domain situs anime sering berganti; cukup ubah `baseUrl` di sana.
 | NontonAnimeID | `/nontonanimeid` | ⚠️ lokal saja | Cloudflare Managed Challenge menolak IP datacenter. |
 | Kuramanime | `/kuramanime` | ⚠️ lokal saja | Cloudflare menolak IP datacenter (403 dari Vercel). |
 | Doronime | `/doronime` | ⚠️ lokal saja | Hanya tautan unduhan, tanpa pemutar. Cloudflare menolak IP datacenter. |
-| Nimegami | `/nimegami` | ⛔ nonaktif | Rute tetap terpasang, tapi tidak tercantum di `GET /`. |
+| Nimegami | `/nimegami` | ✅ aktif | Situs kini Next.js; tanpa jadwal dan katalog A-Z. |
 
 "Lokal saja" berarti rute berjalan dari IP rumah (mis. saat `bun dev`), tetapi gagal saat
 di-deploy ke Vercel.
@@ -198,20 +198,19 @@ punya `GET /<sumber>/` yang mendaftar rute miliknya.
 | `GET` | `/episode/:slug/:episode` | Tautan unduhan per resolusi |
 | `GET` | `/download/:id` | Resolusi tautan unduhan akhir |
 
-### Nimegami — `/nimegami` (nonaktif)
+### Nimegami — `/nimegami`
 
 | Method | Endpoint | Keterangan |
 | --- | --- | --- |
-| `GET` | `/home` | Terbaru + rekomendasi |
+| `GET` | `/home` | Rilis terbaru + rekomendasi |
 | `GET` | `/anime` | Daftar anime |
-| `GET` | `/anime-list` | Koleksi anime A-Z |
-| `GET` | `/schedule` | Jadwal ongoing |
 | `GET` | `/genre` | Daftar genre |
 | `GET` | `/genre/:genreId` | Anime per genre |
 | `GET` | `/ongoing` | Anime ongoing |
+| `GET` | `/completed` | Anime selesai |
 | `GET` | `/search?q=` | Pencarian |
 | `GET` | `/anime/:slug` | Detail anime |
-| `GET` | `/episode/:slug/:episode` | Detail episode |
+| `GET` | `/episode/:slug/:episode` | Stream embed + tautan unduhan |
 
 ### Format respons
 

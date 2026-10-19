@@ -5,18 +5,12 @@ import * as scraper from "../scrapers/nimegami.js";
 import * as parser from "../parsers/nimegami.js";
 import { setPayload } from "../lib/response.js";
 import { BadRequestError } from "../lib/errors.js";
-import type { Nimegami, UrlLink } from "../types/index.js";
-import { paginateAnimeList } from "../lib/anime-list.js";
-import { cachedAsync } from "../lib/async-cache.js";
 
-/** Pagar pengaman kalau markup paginasi Nimegami berubah. */
-const MAX_LIST_PAGES = 20;
-
-function getPageFromQuery(query: Record<string, unknown>): string {
+function getPageFromQuery(query: Record<string, unknown>): number {
 	try {
-		return safeParse(schema.PageSchema, query.page);
+		return parseInt(safeParse(schema.PageSchema, query.page), 10) || 1;
 	} catch {
-		return "1";
+		return 1;
 	}
 }
 
@@ -28,6 +22,20 @@ function getSearchQuery(query: Record<string, unknown>): string {
 	}
 }
 
+function catalogPath(params: Record<string, string>, page: number): string {
+	const search = new URLSearchParams(params);
+	if (page > 1) search.set("page", String(page));
+	const query = search.toString();
+	return `/anime/${query ? `?${query}` : ""}`;
+}
+
+async function sendCatalog(res: Response, path: string, page: number) {
+	const { doc } = await scraper.scrapePage(path);
+	const data = parser.parseAnimeList(doc);
+	const pagination = parser.parsePagination(doc, page);
+	res.json(setPayload(res, { data, pagination }));
+}
+
 export async function getRoutes(
 	req: Request,
 	res: Response,
@@ -35,15 +43,15 @@ export async function getRoutes(
 ) {
 	try {
 		const routes = [
-			{ path: "/", description: "Home - latest & recommended anime" },
-			{ path: "/anime", description: "Anime list (query: page)" },
+			{ path: "/home", description: "Home - latest & recommended anime" },
+			{ path: "/anime", description: "Anime catalog (query: page)" },
 			{ path: "/anime/:slug", description: "Anime details" },
-			{ path: "/search", description: "Search anime (query: q)" },
-			{ path: "/anime-list", description: "All anime grouped A-Z" },
-			{ path: "/schedule", description: "Release schedule grouped by day" },
-			{ path: "/genre", description: "Genre category list" },
-			{ path: "/ongoing", description: "Ongoing anime list (query: page)" },
+			{ path: "/episode/:slug/:episode", description: "Episode streams & downloads" },
+			{ path: "/search", description: "Search anime (query: q, page)" },
+			{ path: "/genre", description: "Genre list" },
 			{ path: "/genre/:genreId", description: "Anime filtered by genre (query: page)" },
+			{ path: "/ongoing", description: "Ongoing anime (query: page)" },
+			{ path: "/completed", description: "Completed anime (query: page)" },
 		];
 		res.json(setPayload(res, { data: routes }));
 	} catch (err) {
@@ -57,9 +65,8 @@ export async function getHome(
 	next: NextFunction,
 ) {
 	try {
-		const doc = await scraper.scrapeDOM("/");
-		const data = parser.parseHome(doc);
-		res.json(setPayload(res, { data }));
+		const { doc } = await scraper.scrapePage("/");
+		res.json(setPayload(res, { data: parser.parseHome(doc) }));
 	} catch (err) {
 		next(err);
 	}
@@ -72,128 +79,7 @@ export async function getAnimeList(
 ) {
 	try {
 		const page = getPageFromQuery(req.query);
-		const path = page !== "1" ? `/page/${page}/` : "/";
-		const doc = await scraper.scrapeDOM(path);
-		const data = parser.parseAnimeList(doc);
-		const pagination = parser.parsePagination(doc);
-		res.json(setPayload(res, { data, pagination }));
-	} catch (err) {
-		next(err);
-	}
-}
-
-export async function getAnimeDetails(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		const { slug } = req.params;
-		if (!slug) throw new BadRequestError("Slug is required");
-		const doc = await scraper.scrapeDOM(`/${slug}/`);
-		const data = parser.parseAnimeDetails(doc);
-		res.json(setPayload(res, { data }));
-	} catch (err) {
-		next(err);
-	}
-}
-
-/**
- * Nimegami menyajikan seluruh episode pada halaman anime, jadi detail episode
- * diambil dari halaman yang sama lalu disaring per nomor episode.
- */
-export async function getEpisodeDetails(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		const { slug, episode } = req.params;
-		if (!slug) throw new BadRequestError("Slug is required");
-
-		const episodeNumber = parseInt(String(episode), 10);
-		if (isNaN(episodeNumber)) throw new BadRequestError("Episode must be a number");
-
-		const doc = await scraper.scrapeDOM(`/${slug}/`);
-		const data = parser.parseEpisodeDetails(doc, String(slug), episodeNumber);
-		res.json(setPayload(res, { data }));
-	} catch (err) {
-		next(err);
-	}
-}
-
-export async function searchAnimes(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		const q = getSearchQuery(req.query);
-		const doc = await scraper.scrapeDOM(`/?s=${encodeURIComponent(q)}&post_type=post`);
-		const data = parser.parseSearchResults(doc);
-		const pagination = parser.parsePagination(doc);
-		res.json(setPayload(res, { data, pagination }));
-	} catch (err) {
-		next(err);
-	}
-}
-
-export async function getSchedule(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		const doc = await scraper.scrapeDOM("/anime-terbaru-sub-indo/");
-		const data = parser.parseScheduleGroups(doc);
-		res.json(setPayload(res, { data }));
-	} catch (err) {
-		next(err);
-	}
-}
-
-export async function getAnimeCollections(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		// `/anime-list/` dipecah jadi beberapa halaman (±500 judul per halaman)
-		// dan satu inisial bisa terpotong antar halaman, jadi semuanya diambil
-		// lalu digabung per inisial.
-		const data = await cachedAsync("anime-list:nimegami", async () => {
-			const first = await scraper.scrapeDOM("/anime-list/");
-			const merged = new Map<string, UrlLink[]>();
-			const collect = (groups: Nimegami.AnimeCollection[]) => {
-				for (const group of groups) {
-					const list = merged.get(group.initial) ?? [];
-					list.push(...group.animeList);
-					merged.set(group.initial, list);
-				}
-			};
-			collect(parser.parseAnimeCollections(first));
-			const totalPages = Math.min(parser.parsePagination(first)?.totalPages ?? 1, MAX_LIST_PAGES);
-			for (let page = 2; page <= totalPages; page++) {
-				const doc = await scraper.scrapeDOM(`/anime-list/page/${page}/`);
-				collect(parser.parseAnimeCollections(doc));
-			}
-			return [...merged].map(([initial, animeList]) => ({ initial, animeList }));
-		});
-		res.json(setPayload(res, paginateAnimeList(data, req.query.initial, req.query.page)));
-	} catch (err) {
-		next(err);
-	}
-}
-
-export async function getGenres(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		const doc = await scraper.scrapeDOM("/genre-category-list/");
-		const data = parser.parseGenreCategories(doc);
-		res.json(setPayload(res, { data }));
+		await sendCatalog(res, catalogPath({ sort: "updated" }, page), page);
 	} catch (err) {
 		next(err);
 	}
@@ -206,11 +92,47 @@ export async function getOngoing(
 ) {
 	try {
 		const page = getPageFromQuery(req.query);
-		const path = page !== "1" ? `/tag/on-going/page/${page}/` : "/tag/on-going/";
-		const doc = await scraper.scrapeDOM(path);
-		const data = parser.parseSearchResults(doc);
-		const pagination = parser.parsePagination(doc);
-		res.json(setPayload(res, { data, pagination }));
+		await sendCatalog(res, catalogPath({ status: "RELEASING", sort: "updated" }, page), page);
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getCompleted(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
+	try {
+		const page = getPageFromQuery(req.query);
+		await sendCatalog(res, catalogPath({ status: "FINISHED", sort: "updated" }, page), page);
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function searchAnimes(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
+	try {
+		const q = getSearchQuery(req.query);
+		const page = getPageFromQuery(req.query);
+		await sendCatalog(res, catalogPath({ q }, page), page);
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getGenres(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
+	try {
+		const { doc } = await scraper.scrapePage("/genre/");
+		res.json(setPayload(res, { data: parser.parseGenreCategories(doc) }));
 	} catch (err) {
 		next(err);
 	}
@@ -225,11 +147,52 @@ export async function getAnimesByGenre(
 		const { genreId } = req.params;
 		if (!genreId) throw new BadRequestError("Genre ID is required");
 		const page = getPageFromQuery(req.query);
-		const path = page !== "1" ? `/category/${genreId}/page/${page}/` : `/category/${genreId}/`;
-		const doc = await scraper.scrapeDOM(path);
-		const data = parser.parseAnimeByGenre(doc);
-		const pagination = parser.parsePagination(doc);
-		res.json(setPayload(res, { data, pagination }));
+		const slug = encodeURIComponent(String(genreId));
+		const path = page > 1 ? `/category/${slug}/page/${page}/` : `/category/${slug}/`;
+		await sendCatalog(res, path, page);
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getAnimeDetails(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
+	try {
+		const { slug } = req.params;
+		if (!slug) throw new BadRequestError("Slug is required");
+		const { doc, html } = await scraper.scrapePage(`/${encodeURIComponent(String(slug))}/`);
+		res.json(setPayload(res, { data: parser.parseAnimeDetails(doc, html) }));
+	} catch (err) {
+		next(err);
+	}
+}
+
+/** Semua episode ada di halaman anime, jadi episode disaring dari halaman yang sama. */
+export async function getEpisodeDetails(
+	req: Request,
+	res: Response,
+	next: NextFunction,
+) {
+	try {
+		const { slug, episode } = req.params;
+		if (!slug) throw new BadRequestError("Slug is required");
+
+		const episodeNumber = parseInt(String(episode), 10);
+		if (isNaN(episodeNumber)) throw new BadRequestError("Episode must be a number");
+
+		const { doc, html } = await scraper.scrapePage(`/${encodeURIComponent(String(slug))}/`);
+		const data = parser.parseEpisodeDetails(doc, html, String(slug), episodeNumber);
+		const resolved = await Promise.all(
+			data.streamSources.map(async (source) => ({
+				...source,
+				url: await scraper.resolveWrappedPlayer(source.url),
+			})),
+		);
+		data.streamSources = resolved.filter((source) => !scraper.isWrappedPlayer(source.url));
+		res.json(setPayload(res, { data }));
 	} catch (err) {
 		next(err);
 	}

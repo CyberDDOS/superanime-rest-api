@@ -37,7 +37,7 @@ export const sources = {
 	nimegami: {
 		baseUrl: "https://nimegami.id",
 		name: "Nimegami",
-		enabled: false,
+		enabled: true,
 		cacheTtl: 10,
 	},
 	doronime: {

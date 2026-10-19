@@ -102,7 +102,7 @@ async function syncSourceAnimeList(source: string): Promise<number> {
 		case "nimegami": {
 			const modScraper = await import("../scrapers/nimegami.js");
 			const modParser = await import("../parsers/nimegami.js");
-			const doc = await modScraper.scrapeDOM("/");
+			const doc = await modScraper.scrapeDOM("/anime/");
 			const data = modParser.parseAnimeList(doc);
 			const flat = data.map((a) => ({
 				slug: a.slug,
@@ -190,7 +190,7 @@ async function syncSourceGenres(source: string): Promise<number> {
 		case "nimegami": {
 			const modScraper = await import("../scrapers/nimegami.js");
 			const modParser = await import("../parsers/nimegami.js");
-			const doc = await modScraper.scrapeDOM("/");
+			const doc = await modScraper.scrapeDOM("/genre/");
 			const data = modParser.parseGenreCategories(doc);
 			const genres = data.map((g) => ({
 				name: g.title,
