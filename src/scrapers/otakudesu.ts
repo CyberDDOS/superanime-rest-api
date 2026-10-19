@@ -100,16 +100,23 @@ export async function resolvePlayerUrl(url: string, userAgent?: string): Promise
 	try {
 		// Membuat URL baru di sisi desustream bisa makan ~3 detik.
 		const html = await fetchText(url, `${BASE}/`, 15_000, userAgent || undefined);
-		const match =
-			html.match(/videoURL\s*=\s*["']([^"']+)["']/) ??
-			// Pemutar "desuwatch" memakai <source> ke googlevideo.com/videoplayback
-			// (Blogger) yang tidak berakhiran .mp4.
-			html.match(/<source[^>]+src=["'](https?:\/\/[^"']+)["']/i) ??
-			html.match(/["'](https?:\/\/[^"']+\.(?:mp4|webm)(?:\?[^"']*)?)["']/i);
-		return match?.[1]?.replace(/&amp;/g, "&") ?? url;
+		return extractPlayerVideoUrl(html) ?? url;
 	} catch {
 		return url;
 	}
+}
+
+/**
+ * desuwatch: <source> ke googlevideo (Blogger) tanpa akhiran .mp4.
+ * desudrive: jwplayer dengan `otakudesu('{"file":"https://www.googleapis.com/drive/..."}')`.
+ */
+export function extractPlayerVideoUrl(html: string): string | null {
+	const match =
+		html.match(/videoURL\s*=\s*["']([^"']+)["']/) ??
+		html.match(/["']?file["']?\s*:\s*["'](https?:\/\/[^"']+)["']/) ??
+		html.match(/<source[^>]+src=["'](https?:\/\/[^"']+)["']/i) ??
+		html.match(/["'](https?:\/\/[^"']+\.(?:mp4|webm)(?:\?[^"']*)?)["']/i);
+	return match?.[1]?.replace(/&amp;/g, "&").replace(/\\\//g, "/") ?? null;
 }
 
 /** Fetch teks dari path (digunakan untuk secret/utility) */

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import * as parser from "../src/parsers/otakudesu.js";
-import { isUnembeddable } from "../src/scrapers/otakudesu.js";
+import { extractPlayerVideoUrl, isUnembeddable } from "../src/scrapers/otakudesu.js";
 import { fixture } from "./helpers.js";
 
 describe("otakudesu episode parser", () => {
@@ -23,5 +23,21 @@ describe("isUnembeddable", () => {
 		expect(isUnembeddable("https://desustream.com/dstream/desuwatch/new/index.php?id=x")).toBe(true);
 		expect(isUnembeddable("https://www.desustream.info/x")).toBe(true);
 		expect(isUnembeddable("https://ondesu.example.com/x")).toBe(false);
+	});
+});
+
+describe("extractPlayerVideoUrl", () => {
+	test("desudrive: file Google Drive dari pemanggilan otakudesu()", () => {
+		const html = `<script>otakudesu('{"file":"https://www.googleapis.com/drive/v3/files/abc?alt=media&key=k","img":"https://drive.google.com/thumbnail?id=abc"}');</script>`;
+		expect(extractPlayerVideoUrl(html)).toBe("https://www.googleapis.com/drive/v3/files/abc?alt=media&key=k");
+	});
+
+	test("desuwatch: <source> googlevideo", () => {
+		const html = `<video><source src="https://rr1.googlevideo.com/videoplayback?id=1&amp;itag=18" type="video/mp4"></video>`;
+		expect(extractPlayerVideoUrl(html)).toBe("https://rr1.googlevideo.com/videoplayback?id=1&itag=18");
+	});
+
+	test("tanpa URL video", () => {
+		expect(extractPlayerVideoUrl("<script>var file = e.file</script>")).toBeNull();
 	});
 });
