@@ -70,3 +70,10 @@ export class BadGatewayError extends AppError {
 		this.name = "BadGatewayError";
 	}
 }
+
+export class GatewayTimeoutError extends AppError {
+	constructor(message = "Upstream did not respond in time") {
+		super(504, message);
+		this.name = "GatewayTimeoutError";
+	}
+}
