@@ -217,7 +217,10 @@ function readLinks(html: string): RscLink[] {
 	for (const raw of payload.match(/\{"id":"[^{}]*"playUrl"[^{}]*\}/g) ?? []) {
 		try {
 			const link = JSON.parse(raw) as RscLink;
-			if (link.id && !links.has(link.id)) links.set(link.id, link);
+			if (!link.id || links.has(link.id)) continue;
+			if (link.playUrl) link.playUrl = absolute(link.playUrl);
+			if (link.url) link.url = absolute(link.url);
+			links.set(link.id, link);
 		} catch {
 			continue;
 		}

@@ -84,10 +84,9 @@ export async function getAnimeList(
 ) {
 	try {
 		const page = getPageFromQuery(req.query);
-		const qs = page && page !== "1" ? `?page=${page}` : "";
-		const doc = await scraper.scrapeDOM(`/anime/${qs}`);
+		const doc = await scraper.scrapeDOM(scraper.archivePath({ order: "update" }, page));
 		const data = parser.parseAnimeByStatus(doc);
-		const pagination = parser.parsePagination(doc);
+		const pagination = parser.parsePagination(doc, Number(page));
 		res.json(setPayload(res, { data, pagination }));
 	} catch (err) {
 		next(err);
@@ -116,7 +115,7 @@ export async function getGenreList(
 	next: NextFunction,
 ) {
 	try {
-		const doc = await scraper.scrapeDOM("/anime/list-mode/");
+		const doc = await scraper.scrapeDOM(scraper.archivePath({}));
 		const data = parser.parseGenreList(doc);
 		res.json(setPayload(res, { data }));
 	} catch (err) {
@@ -131,10 +130,9 @@ export async function getOngoing(
 ) {
 	try {
 		const page = getPageFromQuery(req.query);
-		const qs = `?status=Ongoing&order=update${page && page !== "1" ? `&page=${page}` : ""}`;
-		const doc = await scraper.scrapeDOM(`/anime/${qs}`);
+		const doc = await scraper.scrapeDOM(scraper.archivePath({ status: "Ongoing", order: "update" }, page));
 		const data = parser.parseAnimeByStatus(doc);
-		const pagination = parser.parsePagination(doc);
+		const pagination = parser.parsePagination(doc, Number(page));
 		res.json(setPayload(res, { data, pagination }));
 	} catch (err) {
 		next(err);
@@ -148,10 +146,9 @@ export async function getCompleted(
 ) {
 	try {
 		const page = getPageFromQuery(req.query);
-		const qs = `?status=Completed&order=update${page && page !== "1" ? `&page=${page}` : ""}`;
-		const doc = await scraper.scrapeDOM(`/anime/${qs}`);
+		const doc = await scraper.scrapeDOM(scraper.archivePath({ status: "Completed", order: "update" }, page));
 		const data = parser.parseAnimeByStatus(doc);
-		const pagination = parser.parsePagination(doc);
+		const pagination = parser.parsePagination(doc, Number(page));
 		res.json(setPayload(res, { data, pagination }));
 	} catch (err) {
 		next(err);
@@ -165,7 +162,7 @@ export async function getAnimeDetails(
 ) {
 	try {
 		const { slug } = req.params;
-		const doc = await scraper.scrapeDOM(`/anime/${slug}/`);
+		const doc = await scraper.scrapeDOM(scraper.animePath(String(slug)));
 		const data = parser.parseAnimeDetails(doc);
 		res.json(setPayload(res, { data }));
 	} catch (err) {
@@ -196,10 +193,9 @@ export async function getAnimesByGenre(
 	try {
 		const { genreId } = req.params;
 		const page = getPageFromQuery(req.query);
-		const path = `/genres/${genreId}/page/${page}`;
-		const doc = await scraper.scrapeDOM(path);
+		const doc = await scraper.scrapeDOM(scraper.archivePath({ "genre[]": String(genreId), order: "update" }, page));
 		const data = parser.parseAnimeByGenre(doc);
-		const pagination = parser.parsePagination(doc);
+		const pagination = parser.parsePagination(doc, Number(page));
 		res.json(setPayload(res, { data, pagination }));
 	} catch (err) {
 		next(err);

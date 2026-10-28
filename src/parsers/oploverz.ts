@@ -17,8 +17,14 @@ function parseCard(el: HTMLElement): Oploverz.AnimeCard {
 		genres.push({ title: Text(g), url: AnimeSrc(g, baseUrl) || "" });
 	}
 
+	const ownText = titleEl.childNodes
+		.filter((node) => node.nodeType === 3)
+		.map((node) => node.text.trim())
+		.filter(Boolean)
+		.join(" ");
+
 	return {
-		title: Text(titleEl),
+		title: ownText || Text(titleEl.querySelector("h2")) || Text(titleEl),
 		slug: Id(linkEl || titleEl),
 		poster: Src(el.querySelector("img.ts-post-image")),
 		type: Text(el.querySelector(".typez")),
@@ -223,9 +229,9 @@ export function parseAnimeByGenre(doc: HTMLElement): Oploverz.AnimeCard[] {
 	return result;
 }
 
-export function parsePagination(doc: HTMLElement): Pagination | null {
+export function parsePagination(doc: HTMLElement, requestedPage = 1): Pagination | null {
 	const nav = doc.querySelector("div.pagination");
-	if (!nav) return null;
+	if (!nav) return parseNextPrevPagination(doc, requestedPage);
 
 	const links = nav.querySelectorAll("a");
 	const currentEl = nav.querySelector(".current, span.current, a.current");
@@ -320,6 +326,23 @@ export function parseSchedules(doc: HTMLElement): Oploverz.ScheduleGroup[] {
 	return result;
 }
 
+/** Arsip query string hanya punya tombol Prev/Next (`div.hpage`), tanpa total halaman. */
+function parseNextPrevPagination(doc: HTMLElement, currentPage: number): Pagination | null {
+	const nav = doc.querySelector("div.hpage");
+	if (!nav) return null;
+	const hasPrev = !!nav.querySelector("a.l");
+	const hasNext = !!nav.querySelector("a.r");
+	if (!hasPrev && !hasNext) return null;
+	return {
+		currentPage,
+		prevPage: hasPrev ? currentPage - 1 : null,
+		nextPage: hasNext ? currentPage + 1 : null,
+		totalPages: hasNext ? currentPage + 1 : currentPage,
+		hasPrevPage: hasPrev,
+		hasNextPage: hasNext,
+	};
+}
+
 export function parseGenreList(doc: HTMLElement): Oploverz.GenreCard[] {
 	const genreLinks = doc.querySelectorAll("ul.genres li a");
 	if (genreLinks.length) {
@@ -343,8 +366,9 @@ export function parseGenreList(doc: HTMLElement): Oploverz.GenreCard[] {
 			if (val && !seen.has(val)) {
 				seen.add(val);
 				const slug = val.toLowerCase().replace(/\s+/g, "-");
+				const label = Text(doc.querySelector(`label[for="${Attr(input, "id")}"]`));
 				result.push({
-					title: val,
+					title: label || val,
 					genreId: slug,
 					sourceUrl: `${baseUrl}/genres/${slug}/`,
 				});

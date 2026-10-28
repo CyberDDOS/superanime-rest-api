@@ -30,16 +30,27 @@ export async function scrapePage(pathname: string): Promise<NimegamiPage> {
 	return { doc: parse(html), html };
 }
 
+function isStreamingPage(url: string): boolean {
+	return url.startsWith(`${BASE}/`) && /\/streaming\/\d+\//.test(url);
+}
+
+/** Pemutar yang menolak di-iframe di luar Nimegami, sehingga URL videonya perlu diambil. */
 export function isWrappedPlayer(url: string): boolean {
-	return /\/\/[^/]+\/https?:\/\/(?:[^/]+\.)?desustream\.[a-z]+\//i.test(url);
+	return /\/\/[^/]+\/https?:\/\/(?:[^/]+\.)?desustream\.[a-z]+\//i.test(url) || isStreamingPage(url);
+}
+
+export function extractPlayerSource(html: string): string | null {
+	const src =
+		html.match(/id=["']player["'][^>]*\sdata-src=["'](https?:\/\/[^"']+)["']/i)?.[1] ??
+		html.match(/<video[^>]+src=["'](https?:\/\/[^"']+)["']/i)?.[1];
+	return src ? src.replace(/&amp;/g, "&") : null;
 }
 
 export async function resolveWrappedPlayer(url: string): Promise<string> {
 	if (!isWrappedPlayer(url)) return url;
 	try {
 		const html = await fetchText(url, `${BASE}/`, PLAYER_TIMEOUT);
-		const src = html.match(/<video[^>]+src=["'](https?:\/\/[^"']+)["']/i)?.[1];
-		return src ? src.replace(/&amp;/g, "&") : url;
+		return extractPlayerSource(html) ?? url;
 	} catch {
 		return url;
 	}
