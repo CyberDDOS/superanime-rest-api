@@ -12,6 +12,9 @@
  *   itu ada single-flight per origin.
  */
 
+import { chmodSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+
 export interface CfCookie {
 	/** Header Cookie lengkap, mis. "cf_clearance=...; __cf_bm=..." */
 	cookie: string;
@@ -31,6 +34,8 @@ export interface CfCookieStoreOptions {
 	now?: () => number;
 	fetchImpl?: FetchLike;
 	log?: (message: string) => void;
+	/** Path penyimpanan cookie. Kosong = tidak disimpan ke disk. */
+	cookieFile?: string;
 }
 
 const DEFAULT_TTL_MS = 6 * 60 * 60 * 1000;
@@ -74,6 +79,48 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 
 	const cache = new Map<string, CfCookie>();
 	const inflight = new Map<string, Promise<CfCookie | null>>();
+	const cookieFile = options.cookieFile ?? process.env.CF_COOKIE_FILE ?? "";
+	let diskLoaded = false;
+
+	/** Muat sekali dari disk; file belum ada adalah kondisi normal. */
+	function loadFromDisk(): void {
+		if (diskLoaded || !cookieFile) return;
+		diskLoaded = true;
+		try {
+			const parsed = JSON.parse(readFileSync(cookieFile, "utf8")) as Record<string, CfCookie>;
+			for (const [origin, entry] of Object.entries(parsed)) {
+				if (!entry || typeof entry.cookie !== "string" || typeof entry.userAgent !== "string") continue;
+				if (typeof entry.expiresAt !== "number" || entry.expiresAt <= now()) continue;
+				cache.set(origin, {
+					cookie: entry.cookie,
+					userAgent: entry.userAgent,
+					acceptLanguage:
+						typeof entry.acceptLanguage === "string" ? entry.acceptLanguage : "en-US,en;q=0.9",
+					expiresAt: entry.expiresAt,
+				});
+			}
+			if (cache.size) log(`[cf-cookie] muat ${cache.size} cookie dari disk`);
+		} catch {
+			/* ENOENT atau JSON rusak: mulai dengan cache kosong. */
+		}
+	}
+
+	function saveToDisk(): void {
+		if (!cookieFile) return;
+		try {
+			mkdirSync(dirname(cookieFile), { recursive: true });
+			const rows: Record<string, CfCookie> = {};
+			for (const [origin, entry] of cache) {
+				if (entry.expiresAt > now()) rows[origin] = entry;
+			}
+			const tmp = `${cookieFile}.tmp-${process.pid}`;
+			writeFileSync(tmp, JSON.stringify(rows, null, 2), { mode: 0o600 });
+			chmodSync(tmp, 0o600);
+			renameSync(tmp, cookieFile);
+		} catch (err) {
+			log(`[cf-cookie] gagal menyimpan cookie: ${err instanceof Error ? err.message : String(err)}`);
+		}
+	}
 
 	/** `undefined` = ikut environment; `""` = solver dimatikan. */
 	function solverUrl(): string {
@@ -151,6 +198,7 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 			};
 
 			cache.set(origin, entry);
+			saveToDisk();
 			log(
 				`[cf-cookie] solve ok host=${origin} ms=${Math.round(now() - started)} cookies=${jar.length}`,
 			);
@@ -170,6 +218,8 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 		const origin = normalizeOrigin(originInput);
 		if (!origin) return null;
 
+		loadFromDisk();
+
 		const cached = cache.get(origin);
 		if (cached && cached.expiresAt > now()) return cached;
 
@@ -186,12 +236,13 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 	/** Buang cookie (mis. setelah 403) supaya permintaan berikutnya solve ulang. */
 	function invalidate(originInput: string): void {
 		const origin = normalizeOrigin(originInput);
-		if (origin) cache.delete(origin);
+		if (origin && cache.delete(origin)) saveToDisk();
 	}
 
 	function clear(): void {
 		cache.clear();
 		inflight.clear();
+		saveToDisk();
 	}
 
 	return {

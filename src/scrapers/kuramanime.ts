@@ -1,6 +1,7 @@
 import { parse as parseHtml, type HTMLElement } from "node-html-parser";
 import { fetchDOM, DEFAULT_USER_AGENT, describeFailure } from "../lib/fetcher.js";
 import { BadGatewayError } from "../lib/errors.js";
+import { cfCookies, type CfCookie } from "../lib/cf-cookie.js";
 import { sources } from "../config/index.js";
 import { extractAuthorization } from "./kuramanime-auth.js";
 
@@ -13,7 +14,7 @@ export async function scrapeDOM(
 	ref?: string,
 	sanitize = false,
 ): Promise<HTMLElement> {
-	return fetchDOM(`${BASE}${pathname}`, { ref, sanitize });
+	return fetchDOM(`${BASE}${pathname}`, { ref, sanitize, cf: true });
 }
 
 /**
@@ -24,27 +25,61 @@ class Session {
 	private cookies = new Map<string, string>();
 
 	async request(url: string, init: Omit<RequestInit, "headers"> & { headers?: Record<string, string> } = {}): Promise<string> {
-		const controller = new AbortController();
-		const timer = setTimeout(() => controller.abort(), TIMEOUT);
+		// Cookie clearance dipasang di sesi ini juga: halaman stream hanya
+		// dibalas lengkap untuk sesi yang sama, dan Cloudflare memeriksa
+		// cookie yang sama sebelum origin sempat melihat permintaan.
+		const cf = await cfCookies.getCookie(BASE);
 
-		try {
-			const headers: Record<string, string> = { "User-Agent": DEFAULT_USER_AGENT, ...init.headers };
-			if (this.cookies.size) {
-				headers.Cookie = [...this.cookies].map(([name, value]) => `${name}=${value}`).join("; ");
+		const send = async (entry: CfCookie | null) => {
+			const jar = new Map(this.cookies);
+			if (entry) {
+				for (const pair of entry.cookie.split("; ")) {
+					const index = pair.indexOf("=");
+					if (index > 0) jar.set(pair.slice(0, index), pair.slice(index + 1));
+				}
 			}
 
-			const res = await fetch(url, { ...init, headers, signal: controller.signal });
-			for (const cookie of res.headers.getSetCookie()) {
+			const headers: Record<string, string> = {
+				"User-Agent": entry?.userAgent ?? DEFAULT_USER_AGENT,
+				...init.headers,
+			};
+			if (jar.size) {
+				headers.Cookie = [...jar].map(([name, value]) => `${name}=${value}`).join("; ");
+			}
+
+			// Timer baru per percobaan: solve ulang setelah 403 bisa memakan
+			// 10–150 detik, dan tidak boleh memotong percobaan kedua.
+			const controller = new AbortController();
+			const timer = setTimeout(() => controller.abort(), TIMEOUT);
+			try {
+				return await fetch(url, { ...init, headers, signal: controller.signal });
+			} finally {
+				clearTimeout(timer);
+			}
+		};
+
+		const harvest = (response: Response) => {
+			for (const cookie of response.headers.getSetCookie()) {
 				const [pair] = cookie.split(";");
 				const index = pair.indexOf("=");
 				if (index > 0) this.cookies.set(pair.slice(0, index).trim(), pair.slice(index + 1).trim());
 			}
+		};
 
-			if (!res.ok) throw new BadGatewayError(await describeFailure(res, url));
-			return await res.text();
-		} finally {
-			clearTimeout(timer);
+		let res = await send(cf);
+		harvest(res);
+
+		if (!res.ok && cf && (res.status === 403 || res.status === 503)) {
+			cfCookies.invalidate(BASE);
+			const fresh = await cfCookies.getCookie(BASE);
+			if (fresh && fresh.cookie !== cf.cookie) {
+				res = await send(fresh);
+				harvest(res);
+			}
 		}
+
+		if (!res.ok) throw new BadGatewayError(await describeFailure(res, url));
+		return await res.text();
 	}
 }
 

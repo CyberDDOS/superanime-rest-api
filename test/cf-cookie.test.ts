@@ -1,4 +1,7 @@
 import { describe, expect, test } from "bun:test";
+import { mkdtempSync, readFileSync, rmSync, statSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { createCfCookieStore } from "../src/lib/cf-cookie.js";
 
 const SOLVER = "http://solver.test";
@@ -143,5 +146,74 @@ describe("cf-cookie", () => {
 		const store = createCfCookieStore({ solverUrl: SOLVER, fetchImpl, log: silent() });
 
 		expect(await store.getCookie("https://contoh.test")).toBeNull();
+	});
+
+	test("cookie disimpan ke disk dan dipakai lagi setelah restart", async () => {
+		const dir = mkdtempSync(join(tmpdir(), "cf-cookie-"));
+		const file = join(dir, "cookies.json");
+
+		try {
+			const first = makeFetch(() => jsonResponse(okPayload()));
+			const storeA = createCfCookieStore({
+				solverUrl: SOLVER,
+				fetchImpl: first.fetchImpl,
+				cookieFile: file,
+				log: silent(),
+			});
+
+			const entry = await storeA.getCookie("https://contoh.test");
+			expect(entry?.cookie).toContain("cf_clearance");
+			expect(first.calls()).toBe(1);
+			expect(statSync(file).mode & 0o777).toBe(0o600);
+
+			const saved = JSON.parse(readFileSync(file, "utf8"));
+			expect(saved["https://contoh.test"].cookie).toContain("cf_clearance");
+
+			// Store baru = proses baru; tidak boleh solve lagi.
+			const second = makeFetch(() => jsonResponse(okPayload()));
+			const storeB = createCfCookieStore({
+				solverUrl: SOLVER,
+				fetchImpl: second.fetchImpl,
+				cookieFile: file,
+				log: silent(),
+			});
+
+			const restored = await storeB.getCookie("https://contoh.test");
+			expect(restored?.cookie).toBe(entry?.cookie ?? "");
+			expect(second.calls()).toBe(0);
+		} finally {
+			rmSync(dir, { recursive: true, force: true });
+		}
+	});
+
+	test("cookie kedaluwarsa di disk tidak dimuat", async () => {
+		const dir = mkdtempSync(join(tmpdir(), "cf-cookie-"));
+		const file = join(dir, "cookies.json");
+
+		try {
+			const first = makeFetch(() => jsonResponse(okPayload()));
+			const storeA = createCfCookieStore({
+				solverUrl: SOLVER,
+				fetchImpl: first.fetchImpl,
+				cookieFile: file,
+				ttlMs: 1_000,
+				log: silent(),
+			});
+			await storeA.getCookie("https://contoh.test");
+
+			const { fetchImpl, calls } = makeFetch(() => jsonResponse(okPayload()));
+			const storeB = createCfCookieStore({
+				solverUrl: SOLVER,
+				fetchImpl,
+				cookieFile: file,
+				now: () => Date.now() + 60_000,
+				log: silent(),
+			});
+
+			await storeB.getCookie("https://contoh.test");
+			expect(calls()).toBe(1);
+		} finally {
+			rmSync(dir, { recursive: true, force: true });
+		}
 	});
 });
