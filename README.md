@@ -174,7 +174,7 @@ punya `GET /<sumber>/` yang mendaftar rute miliknya.
 | `GET` | `/home` | Ongoing, completed, movie |
 | `GET` | `/anime` | Daftar anime (`?search=`, `?status=`, `?sort=`) |
 | `GET` | `/schedule?scheduled_day=` | Jadwal rilis per hari |
-| `GET` | `/episodes` | Episode terbaru |
+| `GET` | `/episodes?animeId=&animeSlug=` | Daftar episode satu anime (dibaca dari `#episodeLists`) |
 | `GET` | `/properties/:propertyType` | Daftar properti (genre, season, studio, dll.) |
 | `GET` | `/properties/:propertyType/:propertyId` | Anime per properti |
 | `GET` | `/anime/:animeId/:animeSlug` | Detail anime |
