@@ -5,6 +5,7 @@ import * as scraper from "../scrapers/otakudesu.js";
 import * as parser from "../parsers/otakudesu.js";
 import { setPayload } from "../lib/response.js";
 import { AppError, BadGatewayError, BadRequestError } from "../lib/errors.js";
+import { isFiledonEmbed, resolveFiledon } from "../lib/filedon.js";
 import { paginateAnimeList } from "../lib/anime-list.js";
 import { cachedAsync } from "../lib/async-cache.js";
 
@@ -42,7 +43,7 @@ export async function getRoutes(
 			{ path: "/anime/:animeId", description: "Anime details" },
 			{ path: "/episode/:episodeId", description: "Episode details" },
 			{ path: "/batch/:batchId", description: "Batch details" },
-			{ path: "/server/:serverId", description: "Server stream details" },
+			{ path: "/server/:serverId", description: "Server stream details (filedon → direct .mp4)" },
 		];
 		res.json(setPayload(res, { data: routes }));
 	} catch (err) {
@@ -284,6 +285,29 @@ export async function getServerDetails(
 
 		if (!embedUrl) {
 			throw new BadGatewayError("Server stream URL not found");
+		}
+
+		// Embed filedon menyimpan URL file direct di props Inertia —
+		// selesaikan di sini supaya klien langsung dapat file .mp4.
+		if (isFiledonEmbed(embedUrl)) {
+			try {
+				const source = await resolveFiledon(embedUrl);
+				res.json(
+					setPayload(res, {
+						data: {
+ title: `Server ${body.q || decoded.id}`,
+							url: source.url,
+							type: "direct",
+							mimeType: source.mimeType,
+							fileName: source.name,
+							size: source.size,
+						},
+					}),
+				);
+				return;
+			} catch {
+				// Kalau resolve gagal, jatuh ke embed apa adanya.
+			}
 		}
 
 		const data = { title: `Server ${body.q || decoded.id}`, url: embedUrl };
