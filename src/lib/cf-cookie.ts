@@ -36,9 +36,12 @@ export interface CfCookieStoreOptions {
 	log?: (message: string) => void;
 	/** Path penyimpanan cookie. Kosong = tidak disimpan ke disk. */
 	cookieFile?: string;
+	/** Lama sumber dianggap rusak setelah cookie ditolak berulang. */
+	breakerMs?: number;
 }
 
 const DEFAULT_TTL_MS = 6 * 60 * 60 * 1000;
+const DEFAULT_BREAKER_MS = 10 * 60 * 1000;
 const DEFAULT_SOLVE_TIMEOUT_MS = 150_000;
 /** Kelonggaran di atas timeout solver supaya pesan error datang dari solver. */
 const GUARD_MS = 15_000;
@@ -81,6 +84,15 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 	const inflight = new Map<string, Promise<CfCookie | null>>();
 	const cookieFile = options.cookieFile ?? process.env.CF_COOKIE_FILE ?? "";
 	let diskLoaded = false;
+
+	// Circuit breaker: kalau cookie hasil solve tetap ditolak, jangan ulangi
+	// solve 130 detik pada setiap request. Sumber ditutup sementara.
+	const envBreaker = Number.parseInt(process.env.CF_BREAKER_S ?? "", 10);
+	const breakerMs =
+		options.breakerMs ??
+		(Number.isFinite(envBreaker) && envBreaker > 0 ? envBreaker * 1000 : DEFAULT_BREAKER_MS);
+	const rejections = new Map<string, number>();
+	const blockedUntil = new Map<string, number>();
 
 	/** Muat sekali dari disk; file belum ada adalah kondisi normal. */
 	function loadFromDisk(): void {
@@ -214,11 +226,35 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 	}
 
 	/** Ambil cookie yang masih berlaku; solve sekali bila belum ada/basi. */
+	/** Cookie dari solve baru tetap ditolak: langsung buka circuit breaker. */
+	function markRejected(originInput: string): void {
+		const origin = normalizeOrigin(originInput);
+		if (!origin) return;
+
+		blockedUntil.set(origin, now() + breakerMs);
+		if (cache.delete(origin)) saveToDisk();
+		log(`[cf-cookie] ${origin} ditutup ${Math.round(breakerMs / 60_000)} menit (cookie ditolak)`);
+	}
+
+	/** Dipakai saat fetch dengan cookie berhasil; bersihkan hitungan gagal. */
+	function markHealthy(originInput: string): void {
+		const origin = normalizeOrigin(originInput);
+		if (!origin) return;
+		rejections.delete(origin);
+		blockedUntil.delete(origin);
+	}
+
 	async function getCookie(originInput: string): Promise<CfCookie | null> {
 		const origin = normalizeOrigin(originInput);
 		if (!origin) return null;
 
 		loadFromDisk();
+
+		const until = blockedUntil.get(origin);
+		if (until !== undefined) {
+			if (until > now()) return null;
+			blockedUntil.delete(origin);
+		}
 
 		const cached = cache.get(origin);
 		if (cached && cached.expiresAt > now()) return cached;
@@ -248,6 +284,8 @@ export function createCfCookieStore(options: CfCookieStoreOptions = {}) {
 	return {
 		getCookie,
 		invalidate,
+		markRejected,
+		markHealthy,
 		clear,
 		get size(): number {
 			return cache.size;

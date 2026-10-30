@@ -4,6 +4,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createCfCookieStore } from "../src/lib/cf-cookie.js";
 
+// Test tidak boleh membaca/menulis cookie file sungguhan (diisi oleh .env).
+process.env.CF_COOKIE_FILE = "";
+
 const SOLVER = "http://solver.test";
 
 function okPayload(overrides: Record<string, unknown> = {}) {
@@ -137,6 +140,31 @@ describe("cf-cookie", () => {
 		const store = createCfCookieStore({ solverUrl: SOLVER, fetchImpl, log: silent() });
 
 		expect(await store.getCookie("https://contoh.test")).toBeNull();
+	});
+
+	test("dua penolakan menutup sumber sementara (circuit breaker)", async () => {
+		let clock = 1_000_000;
+		const { fetchImpl, calls } = makeFetch(() => jsonResponse(okPayload()));
+		const store = createCfCookieStore({
+			solverUrl: SOLVER,
+			fetchImpl,
+			breakerMs: 60_000,
+			now: () => clock,
+			log: silent(),
+		});
+
+		expect(await store.getCookie("https://contoh.test")).not.toBeNull();
+		store.markRejected("https://contoh.test");
+		store.markRejected("https://contoh.test");
+
+		// Selama ditutup: null tanpa memanggil solver lagi.
+		expect(await store.getCookie("https://contoh.test")).toBeNull();
+		expect(calls()).toBe(1);
+		expect(store.size).toBe(0);
+
+		clock += 61_000;
+		expect(await store.getCookie("https://contoh.test")).not.toBeNull();
+		expect(calls()).toBe(2);
 	});
 
 	test("fetch solver melempar error: null, tidak crash", async () => {

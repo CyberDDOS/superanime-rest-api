@@ -18,9 +18,9 @@ export interface FetchOptions {
 	headers?: Record<string, string>;
 }
 
-/** Status yang menandakan cookie Cloudflare basi/ditolak. */
+/** Status yang menandakan cookie Cloudflare basi/ditolak (challenge atau rate limit). */
 function isCfBlock(status: number): boolean {
-	return status === 403 || status === 503;
+	return status === 401 || status === 403 || status === 429 || status === 503;
 }
 
 function originOf(url: string): string {
@@ -69,14 +69,24 @@ async function retryWithFreshCookie(
 	res: Response,
 	send: (entry: CfCookie | null) => Promise<Response>,
 ): Promise<{ res: Response; entry: CfCookie | null }> {
-	if (!cf || !stale || !isCfBlock(res.status)) return { res, entry: stale };
+	if (!cf || !stale) return { res, entry: stale };
 
 	const origin = originOf(url);
+	if (res.ok) {
+		cfCookies.markHealthy(origin);
+		return { res, entry: stale };
+	}
+	if (!isCfBlock(res.status)) return { res, entry: stale };
+
 	cfCookies.invalidate(origin);
 	const fresh = await cfCookies.getCookie(origin);
 	if (!fresh || fresh.cookie === stale.cookie) return { res, entry: stale };
 
-	return { res: await send(fresh), entry: fresh };
+	const retried = await send(fresh);
+	if (retried.ok) cfCookies.markHealthy(origin);
+	else if (isCfBlock(retried.status)) cfCookies.markRejected(origin);
+
+	return { res: retried, entry: fresh };
 }
 
 /**

@@ -1,0 +1,18 @@
+[Unit]
+Description=Captcha solver (Cloudflare / Turnstile / hCaptcha)
+Documentation=file:///opt/captcha-solver
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/captcha-solver
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/xvfb-run -a .venv/bin/python server.py
+Restart=always
+RestartSec=3
+# Satu browserCloak ~700 MB; batas ini mencegah solver menghabiskan VPS.
+MemoryMax=2G
+
+[Install]
+WantedBy=multi-user.target

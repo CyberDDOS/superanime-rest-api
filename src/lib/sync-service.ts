@@ -202,7 +202,7 @@ export async function logSyncFinish(
 	};
 
 	if (itemsCount !== undefined) update.items_count = itemsCount;
-	if (error !== undefined) update.error = error;
+	if (error !== undefined) update.error_message = error;
 
 	const { error: err } = await supabase!
 		.from("sync_log")

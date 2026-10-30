@@ -1,0 +1,19 @@
+[Unit]
+Description=superanime REST API (VPS + Cloudflare cookie solver)
+Documentation=file:///root/superanime-rest-api
+After=network-online.target captcha-solver.service
+Wants=network-online.target captcha-solver.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/superanime-rest-api
+EnvironmentFile=/root/superanime-rest-api/.env
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/bun run src/index.ts
+Restart=on-failure
+RestartSec=5
+# API hanya melayani scraper; 800 MB cukup dan mencegah OOM satu proses.
+MemoryMax=800M
+
+[Install]
+WantedBy=multi-user.target
