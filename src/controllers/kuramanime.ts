@@ -147,7 +147,7 @@ export async function getEpisodes(
 		}
 
 		const doc = await scraper.scrapeDOM(`/anime/${animeId}/${animeSlug}`);
-		const data = parser.parseEpisodes(doc);
+		const data = parser.parseEpisodes(doc, { animeId, animeSlug });
 		res.json(setPayload(res, { data }));
 	} catch (err) {
 		next(err);

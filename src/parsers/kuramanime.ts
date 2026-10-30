@@ -147,27 +147,58 @@ export function parseScheduledAnimes(doc: HTMLElement): Kuramanime.ScheduledAnim
 	return result;
 }
 
-export function parseEpisodes(doc: HTMLElement): Kuramanime.EpisodeCard[] {
+/**
+ * Daftar episode di halaman detail Kuramanime tidak selalu berupa elemen:
+ * sebagian halaman menyimpannya sebagai markup ter-escape di
+ * `#episodeLists[data-content]`. `parseEpisodeNumbers` sudah membaca bentuk itu
+ * untuk `episodeRange`, jadi dipakai juga di sini sebagai cadangan.
+ */
+export function parseEpisodes(
+	doc: HTMLElement,
+	context?: { animeId?: string; animeSlug?: string; poster?: string },
+): Kuramanime.EpisodeCard[] {
 	const items = doc.querySelectorAll(".episode__item, .episode-item");
-	if (!items.length) throw new NotFoundError("No episodes found");
 
-	const result: Kuramanime.EpisodeCard[] = [];
-	for (const item of items) {
-		const titleEl = item.querySelector("a");
-		if (!titleEl) continue;
+	if (items.length) {
+		const result: Kuramanime.EpisodeCard[] = [];
+		for (const item of items) {
+			const titleEl = item.querySelector("a");
+			if (!titleEl) continue;
 
-		result.push({
-			title: Text(titleEl),
-			slug: parseAnimeId(titleEl) || Id(titleEl),
-			episode: Num(item.querySelector(".episode-badge, .ep-badge")),
-			total: Num(item.querySelector(".total-badge, .total")),
-			poster: Src(item.querySelector("img")) || getPoster(item),
-			sourceUrl: AnimeSrc(titleEl, baseUrl),
-		});
+			result.push({
+				title: Text(titleEl),
+				slug: parseAnimeId(titleEl) || Id(titleEl),
+				episode: Num(item.querySelector(".episode-badge, .ep-badge")),
+				total: Num(item.querySelector(".total-badge, .total")),
+				poster: Src(item.querySelector("img")) || getPoster(item),
+				sourceUrl: AnimeSrc(titleEl, baseUrl),
+			});
+		}
+
+		if (result.length) return result;
 	}
 
-	if (!result.length) throw new NotFoundError("No episodes found");
-	return result;
+	const numbers = parseEpisodeNumbers(doc);
+	if (!numbers.length) throw new NotFoundError("No episodes found");
+
+	// Tanpa elemen, judul dan poster diambil dari halaman detail anime itu sendiri.
+	const animeTitle =
+		Text(doc.querySelector(".anime__details__title h3")) ||
+		Text(doc.querySelector(".anime__details__title"));
+	const poster =
+		context?.poster || Attr(doc.querySelector(".anime__details__pic"), "data-setbg");
+	const total = numbers[numbers.length - 1] ?? 0;
+
+	return numbers.map((episode) => ({
+		title: animeTitle ? `${animeTitle} Episode ${episode}` : `Episode ${episode}`,
+		slug: context?.animeId ?? "",
+		episode,
+		total,
+		poster,
+		sourceUrl: context?.animeId && context.animeSlug
+			? `${baseUrl}/anime/${context.animeId}/${context.animeSlug}/episode/${episode}`
+			: undefined,
+	}));
 }
 
 /**
