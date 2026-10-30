@@ -9,8 +9,28 @@ const EMBED_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
+const VIEW_HTML = `<!DOCTYPE html>
+<html>
+<head><title>Filedon</title></head>
+<body>
+<div id="app" data-page="{&quot;component&quot;:&quot;public/view&quot;,&quot;props&quot;:{&quot;errors&quot;:{},&quot;files&quot;:{&quot;id&quot;:256877,&quot;name&quot;:&quot;Otakudesu.io_JJSBR--07_1080p.mp4&quot;,&quot;mime_type&quot;:&quot;video/mp4&quot;,&quot;size&quot;:425114991},&quot;url&quot;:null,&quot;embed_url&quot;:&quot;https://filedon.co/embed/ho5DN9brj6&quot;,&quot;view_url&quot;:&quot;https://filedon.co/view/ho5DN9brj6&quot;,&quot;media&quot;:{&quot;hls_url&quot;:null}}}" />
+</body>
+</html>`;
+
 function mockFetch(html: string, status = 200): typeof fetch {
 	return (async () => new Response(html, { status })) as unknown as typeof fetch;
+}
+
+/** Mock dua halaman: /view/ → /embed/ (via embed_url). */
+function mockViewThenEmbed(): typeof fetch {
+	let called = false;
+	return (async (url: string) => {
+		if (!called && String(url).includes("/view/")) {
+			called = true;
+			return new Response(VIEW_HTML, { status: 200 });
+		}
+		return new Response(EMBED_HTML, { status: 200 });
+	}) as unknown as typeof fetch;
 }
 
 describe("filedon resolver", () => {
@@ -65,5 +85,31 @@ describe("filedon resolver", () => {
 		await expect(
 			resolveFiledon("https://filedon.co/embed/x", mockFetch("not found", 404)),
 		).rejects.toThrow(/404/);
+	});
+
+	test("halaman /view/ (download) diikuti ke embed_url lalu resolve", async () => {
+		const source = await resolveFiledon(
+			"https://filedon.co/view/ho5DN9brj6",
+			mockViewThenEmbed(),
+		);
+		expect(source.url).toContain("r2.cloudflarestorage.com");
+		expect(source.name).toBe("Otakudesu.io_TMTM--04_360p.mp4");
+		expect(source.size).toBe(45922272);
+	});
+
+	test("/view/ dengan embed_url host asing ditolak", async () => {
+		const evil = VIEW_HTML.replace("filedon.co/embed", "evil.com/embed");
+		await expect(
+			resolveFiledon("https://filedon.co/view/x", mockFetch(evil)),
+		).rejects.toThrow(/host asing/);
+	});
+
+	test("halaman tanpa url dan tanpa embed_url ditolak", async () => {
+		const empty = `<!DOCTYPE html><html><body>
+		<div id="app" data-page="{&quot;component&quot;:&quot;public/view&quot;,&quot;props&quot;:{&quot;files&quot;:{&quot;name&quot;:&quot;a.mp4&quot;}}}" />
+		</body></html>`;
+		await expect(
+			resolveFiledon("https://filedon.co/view/x", mockFetch(empty)),
+		).rejects.toThrow(/tidak memuat url/);
 	});
 });

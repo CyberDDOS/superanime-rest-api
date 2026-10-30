@@ -23,6 +23,8 @@ interface FiledonPageProps {
 		size?: number;
 	};
 	url?: string;
+	embed_url?: string;
+	view_url?: string;
 	media?: {
 		preview_url?: string | null;
 		hls_url?: string | null;
@@ -74,6 +76,12 @@ function isAllowedFileUrl(url: string): boolean {
 
 /**
  * Resolve URL embed filedon menjadi URL file video direct.
+ *
+ * Menerima dua jenis halaman:
+ * - `filedon.co/embed/<slug>` — halaman player (serverList), props.url tersedia
+ * - `filedon.co/view/<slug>` — halaman unduhan (downloadList), props.url kosong
+ *   tapi props.embed_url menunjuk ke halaman player
+ *
  * @param embedUrl mis. `https://filedon.co/embed/IEBkk4xIUA`
  */
 export async function resolveFiledon(
@@ -98,7 +106,24 @@ export async function resolveFiledon(
 		throw new Error(`embed filedon balas ${res.status}`);
 	}
 
-	const props = extractInertiaProps(await res.text());
+	let props = extractInertiaProps(await res.text());
+
+	// Halaman /view/ tidak memuat url file — ikuti embed_url ke halaman player.
+	if (!props.url && props.embed_url) {
+		const embedTarget = new URL(props.embed_url);
+		if (embedTarget.hostname !== FILEDON_HOST) {
+			throw new Error(`embed_url menunjuk host asing: ${embedTarget.hostname}`);
+		}
+		const res2 = await fetchImpl(props.embed_url, {
+			headers: { accept: "text/html,*/*" },
+			redirect: "follow",
+		});
+		if (!res2.ok) {
+			throw new Error(`embed filedon balas ${res2.status}`);
+		}
+		props = extractInertiaProps(await res2.text());
+	}
+
 	const url = props.url;
 	if (!url) {
 		throw new Error("props embed tidak memuat url file");
