@@ -5,7 +5,12 @@ import * as parser from "../parsers/otakudesu.js";
 import * as syncService from "../lib/sync-service.js";
 import { AppError } from "../lib/errors.js";
 
-const SOURCES = ["otakudesu", "kuramanime", "oploverz", "nimegami"] as const;
+const SOURCES = ["otakudesu", "kuramanime", "oploverz", "nimegami", "doronime", "nontonanimeid"] as const;
+
+/** Slug dari tautan; URL jadwal hanya membawa tautan, bukan slug. */
+function slugFromUrl(url: string): string {
+	return url.split("?")[0]?.split("/").filter(Boolean).pop() ?? "";
+}
 
 type SourceMap = Record<string, {
 	name: string;
@@ -51,6 +56,24 @@ async function syncSourceHome(source: string): Promise<number> {
 			const data = modParser.parseHome(doc);
 			await syncService.syncHome(source, data);
 			count += data.latest.length + data.recommended.length;
+			break;
+		}
+		case "doronime": {
+			const modScraper = await import("../scrapers/doronime.js");
+			const modParser = await import("../parsers/doronime.js");
+			const doc = await modScraper.scrapeDOM("/");
+			const latest = modParser.parseAnimeCards(doc);
+			await syncService.syncHome(source, { latest });
+			count += latest.length;
+			break;
+		}
+		case "nontonanimeid": {
+			const modScraper = await import("../scrapers/nontonanimeid.js");
+			const modParser = await import("../parsers/nontonanimeid.js");
+			const doc = await modScraper.scrapeDOM("/");
+			const latest = modParser.parseCards(doc, { required: false });
+			await syncService.syncHome(source, { latest });
+			count += latest.length;
 			break;
 		}
 	}
@@ -115,6 +138,50 @@ async function syncSourceAnimeList(source: string): Promise<number> {
 			}));
 			return syncService.syncAnimeList(source, flat);
 		}
+		case "doronime": {
+			const modScraper = await import("../scrapers/doronime.js");
+			const modParser = await import("../parsers/doronime.js");
+			const doc = await modScraper.scrapeDOM("/anime?view=list");
+			const data = modParser.parseAnimeCollections(doc);
+			const flat = data.flatMap((c) =>
+				c.animeList.map((a) => ({
+					slug: slugFromUrl(a.url),
+					title: a.title,
+				})),
+			);
+			return syncService.syncAnimeList(source, flat);
+		}
+		case "nontonanimeid": {
+			const modScraper = await import("../scrapers/nontonanimeid.js");
+			const modParser = await import("../parsers/nontonanimeid.js");
+			try {
+				const doc = await modScraper.scrapeDOM("/anime/?mode=list&sort=series_title");
+				const data = modParser.parseAnimeCollections(doc);
+				const flat = data.flatMap((c) =>
+					c.animeList.map((a) => ({
+						slug: a.slug,
+						title: a.title,
+					})),
+				);
+				return syncService.syncAnimeList(source, flat);
+			} catch (err) {
+				// Halaman katalog penuh paling sering ditolak Cloudflare. Jadwal
+				// rilis memuat anime yang sama dan tetap bisa diakses, jadi pakai
+				// itu sebagai sumber cadangan alih-alih menggagalkan sync.
+				console.warn(
+					`[sync] nontonanimeid anime-list gagal (${err instanceof Error ? err.message : String(err)}), pakai jadwal`,
+				);
+				const doc = await modScraper.scrapeDOM("/jadwal-rilis/");
+				const data = modParser.parseSchedule(doc);
+				const flat = data.flatMap((s) =>
+					s.animeList.map((a) => ({
+						slug: a.slug,
+						title: a.title,
+					})),
+				);
+				return syncService.syncAnimeList(source, flat);
+			}
+		}
 		default:
 			return 0;
 	}
@@ -146,6 +213,32 @@ async function syncSourceSchedule(source: string): Promise<number> {
 				poster: a.poster,
 				type: a.type,
 			}));
+			return syncService.syncAnimeList(source, flat);
+		}
+		case "doronime": {
+			const modScraper = await import("../scrapers/doronime.js");
+			const modParser = await import("../parsers/doronime.js");
+			const doc = await modScraper.scrapeDOM("/schedule");
+			const data = modParser.parseSchedule(doc);
+			const flat = data.flatMap((s) =>
+				s.animeList.map((a) => ({
+					slug: slugFromUrl(a.url),
+					title: a.title,
+				})),
+			);
+			return syncService.syncAnimeList(source, flat);
+		}
+		case "nontonanimeid": {
+			const modScraper = await import("../scrapers/nontonanimeid.js");
+			const modParser = await import("../parsers/nontonanimeid.js");
+			const doc = await modScraper.scrapeDOM("/jadwal-rilis/");
+			const data = modParser.parseSchedule(doc);
+			const flat = data.flatMap((s) =>
+				s.animeList.map((a) => ({
+					slug: a.slug,
+					title: a.title,
+				})),
+			);
 			return syncService.syncAnimeList(source, flat);
 		}
 		case "oploverz":
@@ -184,6 +277,24 @@ async function syncSourceGenres(source: string): Promise<number> {
 			const genres = data
 				.filter((p) => p.propertyType === "genre")
 				.map((g) => ({ name: g.title, slug: g.propertyId }));
+			await syncService.syncGenres(source, genres);
+			return genres.length;
+		}
+		case "doronime": {
+			const modScraper = await import("../scrapers/doronime.js");
+			const modParser = await import("../parsers/doronime.js");
+			const doc = await modScraper.scrapeDOM("/genre");
+			const data = modParser.parseGenreList(doc);
+			const genres = data.map((g) => ({ name: g.title, slug: g.genreId }));
+			await syncService.syncGenres(source, genres);
+			return genres.length;
+		}
+		case "nontonanimeid": {
+			const modScraper = await import("../scrapers/nontonanimeid.js");
+			const modParser = await import("../parsers/nontonanimeid.js");
+			const doc = await modScraper.scrapeDOM("/genres/");
+			const data = modParser.parseGenres(doc);
+			const genres = data.map((g) => ({ name: g.title, slug: g.genreId }));
 			await syncService.syncGenres(source, genres);
 			return genres.length;
 		}
