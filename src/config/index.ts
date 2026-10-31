@@ -76,6 +76,12 @@ export const sources = {
 		enabled: false, // Cloudflare block
 		cacheTtl: 10,
 	},
+	anichin: {
+		baseUrl: "https://anichin.moe",
+		name: "Anichin",
+		enabled: true,
+		cacheTtl: 10,
+	},
 } as const;
 
 export type SourceKey = keyof typeof sources;

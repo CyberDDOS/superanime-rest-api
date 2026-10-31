@@ -6,6 +6,7 @@ import nimegamiRouter from "./nimegami.js";
 import doronimeRouter from "./doronime.js";
 import ylnimeRouter from "./ylnime.js";
 import nontonanimeidRouter from "./nontonanimeid.js";
+import anichinRouter from "./anichin.js";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/nimegami", nimegamiRouter);
 router.use("/doronime", doronimeRouter);
 router.use("/ylnime", ylnimeRouter);
 router.use("/nontonanimeid", nontonanimeidRouter);
+router.use("/anichin", anichinRouter);
 
 export default router;

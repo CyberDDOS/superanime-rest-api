@@ -260,3 +260,51 @@ export namespace NontonAnimeID {
 	export interface AnimeCollection { initial: string; animeList: { title: string; slug: string; url: string }[]; }
 	export interface GenreCard { title: string; genreId: string; }
 }
+
+/* ===== Anichin Types ===== */
+
+export namespace Anichin {
+	export interface GenreCard { title: string; genreId: string; }
+	export interface AnimeCard {
+		title: string;
+		slug: string;
+		poster: string;
+		type: string;
+		episode: string;
+		sourceUrl: string;
+	}
+	export interface EpisodeItem { title: string; slug: string; }
+	export interface AnimeDetails {
+		title: string;
+		japanese: string;
+		poster: string;
+		status: string;
+		type: string;
+		studio: string;
+		network: string;
+		releaseDate: string;
+		duration: string;
+		season: string;
+		synopsis: string;
+		genreList: GenreCard[];
+		episodeList: EpisodeItem[];
+		sourceUrl: string;
+	}
+	/** Hasil resolve embed → direct stream. */
+	export interface ResolvedStream {
+		title: string;
+		url: string;
+		type: "direct" | "hls" | "embed";
+		mimeType?: string;
+		qualities?: Record<string, string>;
+	}
+	export interface EpisodeDetails {
+		title: string;
+		animeSlug: string;
+		navigation: { prev: string | null; next: string | null };
+		serverList: Server[];
+		defaultStreaming: string;
+		sourceUrl: string;
+	}
+	export interface ScheduleGroup { day: string; animeList: AnimeCard[]; }
+}

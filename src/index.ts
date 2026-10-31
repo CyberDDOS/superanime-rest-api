@@ -40,6 +40,7 @@ if (process.env.NODE_ENV !== "vercel") {
 		console.log(`   ➜  http://localhost:${PORT}/nimegami`);
 		console.log(`   ➜  http://localhost:${PORT}/ylnime`);
 		console.log(`   ➜  http://localhost:${PORT}/nontonanimeid`);
+		console.log(`   ➜  http://localhost:${PORT}/anichin`);
 		if (isSupabaseReady()) {
 			console.log(`   📦 Database: Supabase connected`);
 			console.log(`   🔄 Sync:    POST /sync/:source/:type`);
