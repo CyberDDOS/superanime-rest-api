@@ -59,6 +59,7 @@ export async function getRoutes(req: Request, res: Response, next: NextFunction)
 			{ path: "/search", description: "Search (query: q, page)" },
 			{ path: "/genre", description: "All genres" },
 			{ path: "/genres/:genreId", description: "Donghua by genre (query: page)" },
+			{ path: "/schedule", description: "Jadwal rilis per hari" },
 		];
 		res.json(setPayload(res, { data: routes }));
 	} catch (err) {
@@ -71,6 +72,17 @@ export async function getHome(req: Request, res: Response, next: NextFunction) {
 		const doc = await scraper.scrapeDOM("/");
 		const cards = parser.parseCards(doc);
 		res.json(setPayload(res, { data: cards }));
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getSchedule(req: Request, res: Response, next: NextFunction) {
+	try {
+		const doc = await scraper.scrapeDOM("/schedule/");
+		const data = parser.parseSchedule(doc);
+		if (!data.length) throw new BadGatewayError("Schedule anichin kosong / struktur berubah");
+		res.json(setPayload(res, { data }));
 	} catch (err) {
 		next(err);
 	}

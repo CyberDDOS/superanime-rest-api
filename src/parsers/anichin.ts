@@ -189,15 +189,29 @@ export function parseGenreList(
 	return genres;
 }
 
+/**
+ * Parse schedule dari halaman /schedule/ — tiap hari (.listSchh) berisi
+ * daftar link series (.subSchh > a). Link-nya campuran /anime/<slug> dan
+ * halaman series theme (/<slug>/), jadi slug di-normalisasi per type.
+ */
 export function parseSchedule(
 	doc: HTMLElement,
-): Anichin.ScheduleGroup[] {
-	const groups: Anichin.ScheduleGroup[] = [];
-	for (const section of doc.querySelectorAll(".schedule, .airs")) {
-		const day = Text(section.querySelector("h2, h3, .day"));
+): Anichin.ScheduleDay[] {
+	const days: Anichin.ScheduleDay[] = [];
+	for (const dayNode of doc.querySelectorAll(".listSchh")) {
+		const day = Text(dayNode.querySelector("h2"));
 		if (!day) continue;
-		const animeList = parseCards(section);
-		groups.push({ day, animeList });
+		const animeList: Anichin.ScheduleItem[] = [];
+		for (const a of dayNode.querySelectorAll(".subSchh a")) {
+			const url = a.getAttribute("href") ?? "";
+			const slug = url
+				.replace(/^\/+/, "") // buang semua leading slash (ada link protocol-relative //slug/)
+				.replace(/\/+$/, "")
+				.replace(/^anime\//, "");
+			if (!slug || slug === "schedule") continue;
+			animeList.push({ title: a.text.trim(), slug, url });
+		}
+		if (animeList.length) days.push({ day, animeList });
 	}
-	return groups;
+	return days;
 }

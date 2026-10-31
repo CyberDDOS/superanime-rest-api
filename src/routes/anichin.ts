@@ -15,5 +15,6 @@ router.get("/server/:serverId", ctrl.getServerDetails);
 router.get("/search", serverCache(10), ctrl.searchAnimes);
 router.get("/genre", serverCache(10), ctrl.getGenreList);
 router.get("/genres/:genreId", serverCache(10), ctrl.getAnimesByGenre);
+router.get("/schedule", serverCache(10), ctrl.getSchedule);
 
 export default router;

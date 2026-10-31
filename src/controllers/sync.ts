@@ -266,6 +266,19 @@ async function syncSourceSchedule(source: string): Promise<number> {
 			);
 			return syncService.syncAnimeList(source, flat);
 		}
+		case "anichin": {
+			const modScraper = await import("../scrapers/anichin.js");
+			const modParser = await import("../parsers/anichin.js");
+			const doc = await modScraper.scrapeDOM("/schedule/");
+			const data = modParser.parseSchedule(doc);
+			const flat = data.flatMap((s) =>
+				s.animeList.map((a) => ({
+					slug: a.slug,
+					title: a.title,
+				})),
+			);
+			return syncService.syncAnimeList(source, flat);
+		}
 		case "nontonanimeid": {
 			const modScraper = await import("../scrapers/nontonanimeid.js");
 			const modParser = await import("../parsers/nontonanimeid.js");

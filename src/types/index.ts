@@ -307,4 +307,7 @@ export namespace Anichin {
 		sourceUrl: string;
 	}
 	export interface ScheduleGroup { day: string; animeList: AnimeCard[]; }
+	export interface ScheduleItem { title: string; slug: string; url: string; }
+	/** Schedule dari halaman /schedule/: tiap hari = daftar link series. */
+	export interface ScheduleDay { day: string; animeList: ScheduleItem[]; }
 }
