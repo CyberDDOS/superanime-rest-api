@@ -26,7 +26,9 @@ function parseCard(el: HTMLElement): Anichin.AnimeCard {
 	const linkEl = el.querySelector("a");
 	const titleEl = el.querySelector(".tt, h2");
 	return {
-		title: Text(linkEl) || Text(titleEl),
+		// `title` attribute di <a> berisi judul bersih; textContent card
+		// mengandung badge ("DonghuaOngoingSub…") yang tidak diinginkan.
+		title: Attr(linkEl, "title") || Text(titleEl),
 		slug: Id(linkEl),
 		poster: Src(el.querySelector("img")),
 		type: Text(el.querySelector(".typez")),
@@ -43,7 +45,9 @@ export function parseCards(doc: HTMLElement): Anichin.AnimeCard[] {
 export function parsePagination(doc: HTMLElement) {
 	const numbers = [
 		...doc.querySelectorAll(".pagination .page-numbers"),
-	].map((el) => Number.parseInt(el.text.trim(), 10));
+	]
+		.map((el) => Number.parseInt(el.text.trim(), 10))
+		.filter((n) => Number.isFinite(n));
 	const current = Number.parseInt(
 		doc.querySelector(".pagination .current")?.text.trim() ?? "1",
 		10,

@@ -17,7 +17,8 @@ INSERT INTO public.sources (id, name, base_url, enabled) VALUES
   ('otakudesu',   'Otakudesu',   'https://otakudesu.blog',     true),
   ('kuramanime',  'Kuramanime',  'https://v18.kuramanime.ing', true),
   ('oploverz',    'Oploverz',    'https://oploverz.fans',      true),
-  ('nimegami',    'Nimegami',    'https://nimegami.id',         true)
+  ('nimegami',    'Nimegami',    'https://nimegami.id',         true),
+  ('anichin',     'Anichin',     'https://anichin.moe',        true)
 ON CONFLICT (id) DO NOTHING;
 
 -- 2. TABEL ANIME

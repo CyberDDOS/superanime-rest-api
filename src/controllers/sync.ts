@@ -5,7 +5,7 @@ import * as parser from "../parsers/otakudesu.js";
 import * as syncService from "../lib/sync-service.js";
 import { AppError } from "../lib/errors.js";
 
-const SOURCES = ["otakudesu", "kuramanime", "oploverz", "nimegami", "doronime", "nontonanimeid"] as const;
+const SOURCES = ["otakudesu", "kuramanime", "oploverz", "nimegami", "doronime", "nontonanimeid", "anichin"] as const;
 
 /** Slug dari tautan; URL jadwal hanya membawa tautan, bukan slug. */
 function slugFromUrl(url: string): string {
@@ -74,6 +74,15 @@ async function syncSourceHome(source: string): Promise<number> {
 			const latest = modParser.parseCards(doc, { required: false });
 			await syncService.syncHome(source, { latest });
 			count += latest.length;
+			break;
+		}
+		case "anichin": {
+			const modScraper = await import("../scrapers/anichin.js");
+			const modParser = await import("../parsers/anichin.js");
+			const doc = await modScraper.scrapeDOM("/");
+			const cards = modParser.parseCards(doc);
+			await syncService.syncHome(source, { latest: cards });
+			count += cards.length;
 			break;
 		}
 	}
@@ -182,8 +191,37 @@ async function syncSourceAnimeList(source: string): Promise<number> {
 				return syncService.syncAnimeList(source, flat);
 			}
 		}
-		default:
-			return 0;
+		case "anichin": {
+			const modScraper = await import("../scrapers/anichin.js");
+			const modParser = await import("../parsers/anichin.js");
+			// Anichin tidak punya katalog A-Z satu halaman; katalog penuh
+			// diperoleh dari sweep ongoing + completed. Jumlah halaman
+			// dibaca dinamis dari pagination supaya entri baru tidak
+			// tertinggal saat situs bertambah.
+			const sections = ["/ongoing/", "/completed/"] as const;
+			const cards = new Map<string, { slug: string; title: string; poster?: string; type?: string }>();
+			for (const sectionPath of sections) {
+				const firstPage = await modScraper.scrapeDOM(sectionPath);
+				const { totalPages } = modParser.parsePagination(firstPage);
+				for (let page = 1; page <= totalPages; page++) {
+					const pagePath = page === 1 ? sectionPath : `${sectionPath}page/${page}/`;
+					const doc = page === 1 ? firstPage : await modScraper.scrapeDOM(pagePath);
+					for (const card of modParser.parseCards(doc)) {
+						if (card.slug && !cards.has(card.slug)) {
+							cards.set(card.slug, {
+								slug: card.slug,
+								title: card.title,
+								poster: card.poster || undefined,
+								type: card.type || undefined,
+							});
+						}
+					}
+				}
+			}
+			return syncService.syncAnimeList(source, [...cards.values()]);
+		}
+	default:
+		return 0;
 	}
 }
 
@@ -307,6 +345,15 @@ async function syncSourceGenres(source: string): Promise<number> {
 				name: g.title,
 				slug: g.url.split("/").filter(Boolean).pop() || g.title.toLowerCase().replace(/\s+/g, "-"),
 			}));
+			await syncService.syncGenres(source, genres);
+			return genres.length;
+		}
+		case "anichin": {
+			const modScraper = await import("../scrapers/anichin.js");
+			const modParser = await import("../parsers/anichin.js");
+			const doc = await modScraper.scrapeDOM("/genre/");
+			const data = modParser.parseGenreList(doc);
+			const genres = data.map((g) => ({ name: g.title, slug: g.genreId }));
 			await syncService.syncGenres(source, genres);
 			return genres.length;
 		}
